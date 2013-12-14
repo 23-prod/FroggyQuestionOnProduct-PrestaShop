@@ -12,14 +12,14 @@
 	],
 
 	"configurations" : {
-		"FG_QOP_ON_FANCY" : "1",
-		"FG_QOP_ONLY_FOR_CUSTOMER" : "0",
-		"FG_QOP_LINK_TEXT" : {
+		"FC_QOP_ON_FANCY" : "1",
+		"FC_QOP_ONLY_FOR_CUSTOMER" : "0",
+		"FC_QOP_LINK_TEXT" : {
 			"fr" : "Contactez-nous à propos de ce produit",
 			"en" : "Contact us about this product",
 			"default" : "Contact us about this product"
 		},
-		"FG_QOP_TAB_TEXT" : {
+		"FC_QOP_TAB_TEXT" : {
 			"fr" : "Contactez-nous",
 			"en" : "Contact us",
 			"default" : "Contact us"

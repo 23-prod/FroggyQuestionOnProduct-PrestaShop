@@ -79,7 +79,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 	public function hookDisplayHeader($params)
 	{
 		// If we want use a Fancybox
-		if (Configuration::get('FG_QOP_ON_FANCY')) {
+		if (Configuration::get('FC_QOP_ON_FANCY')) {
 			$this->context->controller->addCSS(_PS_CSS_DIR_.'jquery.fancybox-1.3.4.css', 'screen');
 			$this->context->controller->addCSS($this->_path.'views/css/frontend.css');
 			$this->context->controller->addJqueryPlugin('fancybox');
@@ -96,9 +96,9 @@ class FroggyQuestionOnProduct extends FroggyModule
 	public function hookDisplayProductTab($params)
 	{
 		// TODO Uncomment
-		//if (!Configuration::get('FG_QOP_ON_FANCY')) {
+		//if (!Configuration::get('FC_QOP_ON_FANCY')) {
 			$this->context->smarty->assign(array(
-				'tab_text' => Configuration::get('FG_QOP_TAB_TEXT', $this->context->language->id)
+				'tab_text' => Configuration::get('FC_QOP_TAB_TEXT', $this->context->language->id)
 			));
 			return $this->display(__FILE__, 'hookDisplayProductTab.tpl');
 		//}
@@ -114,7 +114,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 	public function hookDisplayProductTabContent($params)
 	{
 		// TODO Uncomment
-		//if (!Configuration::get('FG_QOP_ON_FANCY')) {
+		//if (!Configuration::get('FC_QOP_ON_FANCY')) {
 		return $this->display(__FILE__, 'hookDisplayProductTabContent.tpl');
 		//}
 	}
@@ -128,9 +128,9 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookDisplayProductButtons($params)
 	{
-		if (Configuration::get('FG_QOP_ON_FANCY')) {
+		if (Configuration::get('FC_QOP_ON_FANCY')) {
 			$this->context->smarty->assign(array(
-				'link_text' => Configuration::get('FG_QOP_LINK_TEXT', $this->context->language->id),
+				'link_text' => Configuration::get('FC_QOP_LINK_TEXT', $this->context->language->id),
 				'path' => $this->_path
 			));
 			return $this->display(__FILE__, 'hookDisplayProductButtons.tpl');
