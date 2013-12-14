@@ -240,11 +240,11 @@ class FroggyModule extends Module
 			}
 
 			foreach ($this->sql[$type] as $file) {
-				if (!file_exists(__DIR__.'/'.$file)) {
+				if (!file_exists(_PS_MODULE_DIR_.$this->name.'/sql/'.$file)) {
 					throw new Exception('This SQL file not exists');
 				}
 
-				$content = file_get_contents($file);
+				$content = file_get_contents(_PS_MODULE_DIR_.$this->name.'/sql/'.$file);
 				$content = str_replace('@PREFIX@', _DB_PREFIX_, $content);
 				$content = str_replace('@ENGINE@', _MYSQL_ENGINE_, $content);
 				$queries = preg_split("/;\s*[\r\n]+/", $content);
@@ -293,7 +293,7 @@ class FroggyDefinitionsModuleParser
 	public function __construct($filepath)
 	{
 		if (!file_exists($filepath)) {
-			throw new Exception('File given to definitions parser does not exists');
+			throw new Exception('File given to definitions parser does not exists : '.$this->filepath);
 		}
 		$this->filepath = $filepath;
 	}
@@ -306,7 +306,7 @@ class FroggyDefinitionsModuleParser
 	{
 		$definitions = json_decode(file_get_contents($this->filepath), true);
 		if (is_null($definitions)) {
-			throw new Exception('Definition parser cannot decode file');
+			throw new Exception('Definition parser cannot decode file : '.$this->filepath);
 		}
 
 		return $definitions;
