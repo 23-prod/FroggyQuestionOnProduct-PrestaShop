@@ -37,6 +37,13 @@ class FroggyQuestionOnProduct extends FroggyModule
 	protected $errors = array();
 
 	/**
+	 * Constants definition
+	 */
+	const SHOW_MODE_FANCY = 0;
+	const SHOW_MODE_TAB = 1;
+	const SHOW_MODE_PAGE = 2;
+
+	/**
 	 * Constructor
 	 */
 	public function __construct()
@@ -79,10 +86,11 @@ class FroggyQuestionOnProduct extends FroggyModule
 	public function hookDisplayHeader($params)
 	{
 		// If we want use a Fancybox
-		if (Configuration::get('FC_QOP_ON_FANCY')) {
+		if ($this->isInFancybox()) {
 			$this->context->controller->addCSS(_PS_CSS_DIR_.'jquery.fancybox-1.3.4.css', 'screen');
 			$this->context->controller->addCSS($this->_path.'views/css/frontend.css');
 			$this->context->controller->addJqueryPlugin('fancybox');
+			$this->context->controller->addJS($this->_path.'views/js/common.js');
 		}
 	}
 
@@ -96,7 +104,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 	public function hookDisplayProductTab($params)
 	{
 		// TODO Uncomment
-		//if (!Configuration::get('FC_QOP_ON_FANCY')) {
+		//if (!$this->isInFancybox()) {
 			$this->context->smarty->assign(array(
 				'tab_text' => Configuration::get('FC_QOP_TAB_TEXT', $this->context->language->id)
 			));
@@ -114,7 +122,13 @@ class FroggyQuestionOnProduct extends FroggyModule
 	public function hookDisplayProductTabContent($params)
 	{
 		// TODO Uncomment
-		//if (!Configuration::get('FC_QOP_ON_FANCY')) {
+		//if (!$this->isInFancybox()) {
+		$this->context->smarty->assign(array(
+			'isLogged' => $this->isCustomerLogged(),
+			'id_product' => Tools::getValue('id_product'),
+			'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id)
+		));
+
 		return $this->display(__FILE__, 'hookDisplayProductTabContent.tpl');
 		//}
 	}
@@ -128,10 +142,13 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookDisplayProductButtons($params)
 	{
-		if (Configuration::get('FC_QOP_ON_FANCY')) {
+		if (!$this->isInTab()) {
 			$this->context->smarty->assign(array(
 				'link_text' => Configuration::get('FC_QOP_LINK_TEXT', $this->context->language->id),
-				'path' => $this->_path
+				'path' => $this->_path,
+				'isLogged' => $this->isCustomerLogged(),
+				'id_product' => Tools::getValue('id_product'),
+				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id)
 			));
 			return $this->display(__FILE__, 'hookDisplayProductButtons.tpl');
 		}
@@ -163,10 +180,42 @@ class FroggyQuestionOnProduct extends FroggyModule
 	}
 
 	/**
+	 * Uses in order to send question
+	 */
+	protected function sendQuestion()
+	{
+		// TODO
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function isInFancybox()
+	{
+		return Configuration::get('FC_QOP_SHOW_MODE') == self::SHOW_MODE_FANCY;
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function isInTab()
+	{
+		return Configuration::get('FC_QOP_SHOW_MODE') == self::SHOW_MODE_TAB;
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function isInPage()
+	{
+		return Configuration::get('FC_QOP_SHOW_MODE') == self::SHOW_MODE_PAGE;
+	}
+
+	/**
 	 * Return true if customer is logged
 	 * @return bool
 	 */
-	protected function isCustomerLogged()
+	public function isCustomerLogged()
 	{
 		return (bool)$this->context->customer->id;
 	}

@@ -18,5 +18,12 @@
 *}
 
 <p class="froggy-qop-link">
-	<a href="#"><img src="{$path}/views/img/mail.png" alt="" /> {$link_text}</a>
+	<a id="froggy-qop-fancybox" href="#froggy-qop-fancybox-content"><img src="{$path}/views/img/mail.png" alt="" /> {$link_text}</a>
+	<a id="froggy-qop-fancybox" href="{$link->getModuleLink('froggyquestiononproduct', 'form')}&id_product={$id_product}"><img src="{$path}/views/img/mail.png" alt="" /> {$link_text}</a>
 </p>
+
+<div style="display: none;">
+	<div id="froggy-qop-fancybox-content">
+		{include file='../include/form.tpl'}
+	</div>
+</div>

@@ -12,7 +12,7 @@
 	],
 
 	"configurations" : {
-		"FC_QOP_ON_FANCY" : "1",
+		"FC_QOP_SHOW_MODE" : "1",
 		"FC_QOP_ONLY_FOR_CUSTOMER" : "0",
 		"FC_QOP_LINK_TEXT" : {
 			"fr" : "Contactez-nous à propos de ce produit",
@@ -23,6 +23,7 @@
 			"fr" : "Contactez-nous",
 			"en" : "Contact us",
 			"default" : "Contact us"
-		}
+		},
+		"FC_QOP_CONTACT_ID" : "1"
 	}
 }
