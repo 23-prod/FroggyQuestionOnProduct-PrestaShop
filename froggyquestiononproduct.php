@@ -72,7 +72,11 @@ class FroggyQuestionOnProduct extends FroggyModule
 			'module_dir' => $this->_path
 		);
 
-		$this->smarty->assign($this->name, array_merge($configurations, $assign));
+		$this->smarty->assign(array(
+			$this->name => array_merge($configurations, $assign),
+			'contacts' => Contact::getContacts($this->context->language->id)
+		));
+
 		return $this->display(__FILE__, 'getcontent.tpl');
 	}
 
