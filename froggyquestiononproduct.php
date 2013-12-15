@@ -180,14 +180,6 @@ class FroggyQuestionOnProduct extends FroggyModule
 	}
 
 	/**
-	 * Uses in order to send question
-	 */
-	protected function sendQuestion()
-	{
-		// TODO
-	}
-
-	/**
 	 * @return bool
 	 */
 	protected function isInFancybox()
