@@ -107,13 +107,16 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookDisplayProductTab($params)
 	{
-		// TODO Uncomment
-		//if (!$this->isInFancybox()) {
+		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
+			return;
+		}
+
+		if ($this->isInTab()) {
 			$this->context->smarty->assign(array(
 				'tab_text' => Configuration::get('FC_QOP_TAB_TEXT', $this->context->language->id)
 			));
 			return $this->display(__FILE__, 'hookDisplayProductTab.tpl');
-		//}
+		}
 	}
 
 	/**
@@ -125,16 +128,19 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookDisplayProductTabContent($params)
 	{
-		// TODO Uncomment
-		//if (!$this->isInFancybox()) {
-		$this->context->smarty->assign(array(
-			'isLogged' => $this->isCustomerLogged(),
-			'id_product' => Tools::getValue('id_product'),
-			'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id)
-		));
+		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
+			return;
+		}
 
-		return $this->display(__FILE__, 'hookDisplayProductTabContent.tpl');
-		//}
+		if ($this->isInTab()) {
+			$this->context->smarty->assign(array(
+				'isLogged' => $this->isCustomerLogged(),
+				'id_product' => Tools::getValue('id_product'),
+				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id)
+			));
+
+			return $this->display(__FILE__, 'hookDisplayProductTabContent.tpl');
+		}
 	}
 
 	/**
@@ -146,13 +152,18 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookDisplayProductButtons($params)
 	{
+		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
+			return;
+		}
+
 		if (!$this->isInTab()) {
 			$this->context->smarty->assign(array(
 				'link_text' => Configuration::get('FC_QOP_LINK_TEXT', $this->context->language->id),
 				'path' => $this->_path,
 				'isLogged' => $this->isCustomerLogged(),
 				'id_product' => Tools::getValue('id_product'),
-				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id)
+				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id),
+				'in_fancy' => $this->isInFancybox()
 			));
 			return $this->display(__FILE__, 'hookDisplayProductButtons.tpl');
 		}
