@@ -44,6 +44,10 @@ class FroggyModule extends Module
 
 		$this->author = 'Froggy Commerce';
 
+		// If PS 1.6 or greater, we enable bootstrap
+		if (version_compare(_PS_VERSION_, '1.6.0') >= 0)
+			$this->bootstrap = true;
+
 		parent::__construct();
 
 		foreach ($this->definitions_elements as $key) {
@@ -51,6 +55,31 @@ class FroggyModule extends Module
 				$this->$key = $definitions[$key];
 			}
 		}
+	}
+
+	/**
+	 * @param $method
+	 * @param $args
+	 * @return null
+	 */
+	public function __call($method, $args)
+	{
+		// Build name of class
+		$processor_classname = get_class($this).ucfirst($method).'Processor';
+		$processor_class_path = $this->local_path.'/processors/'.$processor_classname.'.php';
+
+		// Check if processor class exists
+		if (file_exists($processor_class_path)) {
+			require $processor_class_path;
+			if (class_exists($processor_classname) && $processor_classname instanceof FroggyHookProcessorInterface) {
+				$processor = new $processor_classname($this, $args);
+				return $processor->run();
+			} else {
+				// If processor class not implement interface
+				throw new Exception('Hook processor cannot be used !');
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -277,6 +306,27 @@ class FroggyModule extends Module
 		return Configuration::getMultiple($this->getModuleConfigurationsKeys());
 	}
 
+	/**
+	 * Display bootstrap template if PrestaShop is 1.6 or greater
+	 * @param $file
+	 * @param $template
+	 * @param null $cacheId
+	 * @param null $compileId
+	 * @return mixed
+	 */
+	public function display($file, $template, $cacheId = null, $compileId = null)
+	{
+		// If PS 1.6 or greater, we choose bootstrap template
+		if (version_compare(_PS_VERSION_, '1.6.0') >= 0)
+		{
+			$template_bootstrap = str_replace('.tpl', '.bootstrap.tpl', $template);
+			if ($this->getTemplatePath($template_bootstrap) !== NULL)
+				$template = $template_bootstrap;
+		}
+
+		// Call parent display method
+		return parent::display($file, $template, $cacheId, $compileId);
+	}
 }
 
 class FroggyDefinitionsModuleParser
@@ -311,5 +361,20 @@ class FroggyDefinitionsModuleParser
 
 		return $definitions;
 	}
+
+}
+
+interface FroggyHookProcessorInterface
+{
+
+	/**
+	 * @param FroggyModule $module
+	 */
+	public function __construct(FroggyModule $module, array $args);
+
+	/**
+	 * @return mixed
+	 */
+	public function run();
 
 }
