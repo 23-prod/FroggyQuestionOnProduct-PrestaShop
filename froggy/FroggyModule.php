@@ -66,7 +66,7 @@ class FroggyModule extends Module
 	{
 		// Build name of class
 		$processor_classname = get_class($this).ucfirst($method).'Processor';
-		$processor_class_path = $this->local_path.'/processors/'.$processor_classname.'.php';
+		$processor_class_path = $this->local_path.'/hooks/'.$processor_classname.'.php';
 
 		// Check if processor class exists
 		if (file_exists($processor_class_path)) {
@@ -303,7 +303,20 @@ class FroggyModule extends Module
 	 */
 	public function getModuleConfigurations()
 	{
-		return Configuration::getMultiple($this->getModuleConfigurationsKeys());
+		$configurations = array();
+		$languages = Language::getLanguages(false);
+
+		foreach ($this->getModuleConfigurationsKeys() as $key) {
+			if (Configuration::isLangKey($key)) {
+				foreach ($languages as $lang) {
+					$configurations[$key][$lang['id_lang']] = Configuration::get($key, $lang['id_lang']);
+				}
+			} else {
+				$configurations[$key] = Configuration::get($key);
+			}
+		}
+
+		return $configurations;
 	}
 
 	/**
