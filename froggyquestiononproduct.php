@@ -74,7 +74,11 @@ class FroggyQuestionOnProduct extends FroggyModule
 
 		$this->smarty->assign(array(
 			$this->name => array_merge($configurations, $assign),
-			'contacts' => Contact::getContacts($this->context->language->id)
+			'contacts' => Contact::getContacts($this->context->language->id),
+			'id_lang_default' => Configuration::get('PS_LANG_DEFAULT'),
+			'languages' => Language::getLanguages(false),
+			'divLangName' => 'link_text¤tab_text',
+			'module' => $this
 		));
 
 		return $this->display(__FILE__, 'getcontent.tpl');
@@ -168,20 +172,6 @@ class FroggyQuestionOnProduct extends FroggyModule
 			return $this->display(__FILE__, 'hookDisplayProductButtons.tpl');
 		}
 		return null;
-	}
-
-	/**
-	 * Hook Action Admin Controller SetMedia
-	 * Uses in order to add CSS file in backend
-	 *
-	 * @param $params
-	 */
-	public function hookActionAdminControllerSetMedia($params)
-	{
-		/*
-		if (Tools::getValue('controller') == 'adminmodules' && Tools::getValue('configure') == $this->name)
-			$this->context->controller->addCSS($this->_path.'views/css/backend.css', 'all');
-		*/
 	}
 
 	/**
