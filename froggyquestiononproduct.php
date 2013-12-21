@@ -148,13 +148,13 @@ class FroggyQuestionOnProduct extends FroggyModule
 	}
 
 	/**
-	 * Hook Display Product Buttons
+	 * Hook DisplayRightColumnProduct
 	 * Uses in order to show link that allow open fancybox
 	 *
 	 * @param $params
 	 * @return string display for this hook
 	 */
-	public function hookDisplayProductButtons($params)
+	public function hookDisplayRightColumnProduct($params)
 	{
 		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
 			return;
@@ -163,13 +163,13 @@ class FroggyQuestionOnProduct extends FroggyModule
 		if (!$this->isInTab()) {
 			$this->context->smarty->assign(array(
 				'link_text' => Configuration::get('FC_QOP_LINK_TEXT', $this->context->language->id),
-				'path' => $this->_path,
+				'module_path' => $this->_path,
 				'isLogged' => $this->isCustomerLogged(),
 				'id_product' => Tools::getValue('id_product'),
 				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id),
 				'in_fancy' => $this->isInFancybox()
 			));
-			return $this->display(__FILE__, 'hookDisplayProductButtons.tpl');
+			return $this->display(__FILE__, 'hookDisplayRightColumnProduct.tpl');
 		}
 		return null;
 	}
