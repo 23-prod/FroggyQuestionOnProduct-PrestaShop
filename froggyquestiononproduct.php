@@ -181,7 +181,52 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	protected function postProcess()
 	{
-		// TODO
+		if (Tools::getIsset('froggyquestiononproduct_config')) {
+			if (!Validate::isInt(Tools::getValue('FC_QOP_CONTACT_ID'))) {
+				$this->errors[] = $this->l('Contact field is incorrect');
+			}
+			if (Tools::getValue('FC_QOP_SHOW_MODE') != self::SHOW_MODE_FANCY &&
+				Tools::getValue('FC_QOP_SHOW_MODE') != self::SHOW_MODE_TAB &&
+				Tools::getValue('FC_QOP_SHOW_MODE') != self::SHOW_MODE_PAGE) {
+				$this->errors[] = $this->l('Show mode is incorrect');
+			}
+
+			$multilang_fields = array(
+				'tab_text' => $this->l('Tab text is invalid'),
+				'link_text' => $this->l('Link text is invalid')
+			);
+			$languages = Language::getLanguages(false);
+			foreach ($multilang_fields as $field => $message) {
+				$values = Tools::getValue($field);
+				if (is_array($values)) {
+					foreach ($languages as $language) {
+						if (!isset($values[$language['id_lang']]) || !ValidateCore::isCleanHtml($values[$language['id_lang']]) || $values[$language['id_lang']] == '') {
+							$this->errors[] = $message;
+						}
+					}
+				} else {
+					$this->errors[] = $message;
+				}
+			}
+
+			if (!count($this->errors)) {
+				$multilang_fields = array(
+					'FC_QOP_TAB_TEXT' => 'tab_text',
+					'FC_QOP_LINK_TEXT' => 'link_text'
+				);
+				foreach($this->getModuleConfigurationsKeys() as $configuration) {
+					if (isset($multilang_fields[$configuration])) {
+						Configuration::updateValue($configuration, Tools::getValue($multilang_fields[$configuration]));
+					} else {
+						Configuration::updateValue($configuration, Tools::getValue($configuration));
+					}
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return null;
 	}
 
 	/**
