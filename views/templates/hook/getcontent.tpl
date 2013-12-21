@@ -17,23 +17,23 @@
 *  @copyright  2013-2014 Froggy Commerce
 *}
 
-{if $froggyquestiononproduct.post_process.result === true}
-<div class="conf">
-	{l s='Configurations saved with success !' mod='froggyquestiononproduct'}
-</div>
-{elseif $froggyquestiononproduct.post_process.result === false}
-<div class="error">
-	<ul>
-	{foreach from=$froggyquestiononproduct.post_process.errors item=error}
-		<li>{$error}</li>
-	{/foreach}
-	</ul>
-</div>
-{/if}
-
 <script type="text/javascript">id_language = Number({$id_lang_default});</script>
 <fieldset>
 	<legend><img src="{$froggyquestiononproduct.module_dir}logo.png" alt="" width="16" />{l s='Froggy Question on Product' mod='froggyquestiononproduct'}</legend>
+
+	{if $froggyquestiononproduct.post_process.result === true}
+		<div class="conf">
+			{l s='Configurations saved with success !' mod='froggyquestiononproduct'}
+		</div>
+	{elseif $froggyquestiononproduct.post_process.result === false}
+		<div class="error">
+			<ul>
+				{foreach from=$froggyquestiononproduct.post_process.errors item=error}
+					<li>{$error}</li>
+				{/foreach}
+			</ul>
+		</div>
+	{/if}
 
 	<form action="{$smarty.server.REQUEST_URI|escape:'htmlall':'UTF-8'}" method="post">
 		<h3>{l s='General' mod='froggyquestiononproduct'}</h3>
