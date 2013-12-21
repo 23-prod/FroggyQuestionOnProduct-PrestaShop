@@ -15,14 +15,14 @@
 		"FC_QOP_SHOW_MODE" : "1",
 		"FC_QOP_ONLY_FOR_CUSTOMER" : "0",
 		"FC_QOP_LINK_TEXT" : {
-			"fr" : "Contactez-nous à propos de ce produit",
-			"en" : "Contact us about this product",
-			"default" : "Contact us about this product"
+			"fr" : "Une question à propos de ce produit ?",
+			"en" : "A question about this product?",
+			"default" : "A question about this product?"
 		},
 		"FC_QOP_TAB_TEXT" : {
-			"fr" : "Contactez-nous",
-			"en" : "Contact us",
-			"default" : "Contact us"
+			"fr" : "Une question ?",
+			"en" : "A question?",
+			"default" : "A question?"
 		},
 		"FC_QOP_CONTACT_ID" : "1"
 	}
