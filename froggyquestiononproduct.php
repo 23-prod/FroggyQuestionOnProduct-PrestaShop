@@ -61,8 +61,6 @@ class FroggyQuestionOnProduct extends FroggyModule
 	{
 		$this->context->controller->addCss($this->_path.'views/css/backend.css');
 
-		$configurations = $this->getModuleConfigurations();
-
 		// Call POST process
 		$assign = array(
 			'post_process' => array(
@@ -71,6 +69,8 @@ class FroggyQuestionOnProduct extends FroggyModule
 			),
 			'module_dir' => $this->_path
 		);
+
+		$configurations = $this->getModuleConfigurations();
 
 		$this->smarty->assign(array(
 			$this->name => array_merge($configurations, $assign),
