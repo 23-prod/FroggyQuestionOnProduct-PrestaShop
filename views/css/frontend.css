@@ -17,8 +17,59 @@
  *  @copyright  2013-2014 Froggy Commerce
  */
 
+hr.froggy-qop {
+	height: 1px;
+	border: none;
+	background-color: #CCC;
+	margin: 10px 0;
+}
+
 .froggy-qop-link {
 	font-size: 12px;
 	font-weight: bold;
 	text-align: center;
+}
+
+.froggy-qop-form {
+	padding: 5px 10px;
+}
+
+.froggy-qop-form label {
+	float: left;
+	width: 30%;
+	margin-right: 5%;
+	text-align: right;
+}
+
+.froggy-qop-form input,
+.froggy-qop-form textarea {
+	padding: 0 5px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	font-size: 12px;
+}
+
+.froggy-qop-form input {
+	height: 22px;
+}
+
+.froggy-qop-form textarea {
+	width: 60%;
+	height: 120px;
+}
+
+.froggy-qop-form .center {
+	text-align: center;
+}
+
+.froggy-qop-product {
+	background-color: #eee;
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+.froggy-qop-product img {
+	border: 1px solid #ccc;
+	margin-right: 10px;
 }

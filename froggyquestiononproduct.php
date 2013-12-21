@@ -96,10 +96,10 @@ class FroggyQuestionOnProduct extends FroggyModule
 		// If we want use a Fancybox
 		if ($this->isInFancybox()) {
 			$this->context->controller->addCSS(_PS_CSS_DIR_.'jquery.fancybox-1.3.4.css', 'screen');
-			$this->context->controller->addCSS($this->_path.'views/css/frontend.css');
 			$this->context->controller->addJqueryPlugin('fancybox');
 			$this->context->controller->addJS($this->_path.'views/js/common.js');
 		}
+		$this->context->controller->addCSS($this->_path.'views/css/frontend.css');
 	}
 
 	/**

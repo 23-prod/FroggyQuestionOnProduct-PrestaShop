@@ -18,5 +18,9 @@
  */
 
 $(function() {
-	$('#froggy-qop-fancybox').fancybox();
+	$('#froggy-qop-fancybox').fancybox({
+		'width': '550',
+		'height': '260',
+		'autoDimensions' : false
+	});
 });

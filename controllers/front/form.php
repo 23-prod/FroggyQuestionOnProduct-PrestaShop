@@ -101,6 +101,7 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
 		$image = Product::getCover($product->id);
 		$product->id_image = $image['id_image'];
 		$this->context->smarty->assign(array(
+			'in_page' => true,
 			'isLogged' => $this->module->isCustomerLogged(),
 			'id_product' => Tools::getValue('id_product'),
 			'product' => $product
