@@ -175,6 +175,18 @@ class FroggyQuestionOnProduct extends FroggyModule
 	}
 
 	/**
+	 * Hook Action Admin Controller SetMedia
+	 * Uses in order to add CSS file in backend
+	 *
+	 * @param $params
+	 */
+	public function hookActionAdminControllerSetMedia($params)
+	{
+		if (strtolower(Tools::getValue('controller')) == 'adminmodules' && Tools::getValue('configure') == $this->name)
+			$this->context->controller->addJs($this->_path.'views/js/backend.js');
+	}
+
+	/**
 	 * Uses for treat data form getContent form
 	 *
 	 * @return bool, this method can return null, if form isn't send

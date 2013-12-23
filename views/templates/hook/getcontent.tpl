@@ -66,38 +66,42 @@
 
 		<label>{l s='Show mode' mod='froggyquestiononproduct'} <sup class="required">*</sup></label>
 		<div class="margin-form">
-			<select name="FC_QOP_SHOW_MODE">
-				<option value="0" {if (isset($smarty.post.FC_QOP_SHOW_MODE) && $smarty.post.FC_QOP_SHOW_MODE == '0') || (!isset($smarty.post.FC_QOP_SHOW_MODE) && $froggyquestiononproduct.FC_QOP_SHOW_MODE == '0')}selected="selected"{/if}>{l s='In a pop-in' mod='froggyquestiononproduct'}</option>
-				<option value="1" {if (isset($smarty.post.FC_QOP_SHOW_MODE) && $smarty.post.FC_QOP_SHOW_MODE == '1') || (!isset($smarty.post.FC_QOP_SHOW_MODE) && $froggyquestiononproduct.FC_QOP_SHOW_MODE == '1')}selected="selected"{/if}>{l s='In a product tab' mod='froggyquestiononproduct'}</option>
-				<option value="2" {if (isset($smarty.post.FC_QOP_SHOW_MODE) && $smarty.post.FC_QOP_SHOW_MODE == '2') || (!isset($smarty.post.FC_QOP_SHOW_MODE) && $froggyquestiononproduct.FC_QOP_SHOW_MODE == '2')}selected="selected"{/if}>{l s='In a page' mod='froggyquestiononproduct'}</option>
+			<select name="FC_QOP_SHOW_MODE" id="show-mode">
+				<option value="0" {if (isset($smarty.post.FC_QOP_SHOW_MODE) && $smarty.post.FC_QOP_SHOW_MODE == '0') || (!isset($smarty.post.FC_QOP_SHOW_MODE) && $froggyquestiononproduct.FC_QOP_SHOW_MODE == '0')}selected="selected"{/if} data-text="link_text">{l s='In a pop-in' mod='froggyquestiononproduct'}</option>
+				<option value="1" {if (isset($smarty.post.FC_QOP_SHOW_MODE) && $smarty.post.FC_QOP_SHOW_MODE == '1') || (!isset($smarty.post.FC_QOP_SHOW_MODE) && $froggyquestiononproduct.FC_QOP_SHOW_MODE == '1')}selected="selected"{/if} data-text="tab_text">{l s='In a product tab' mod='froggyquestiononproduct'}</option>
+				<option value="2" {if (isset($smarty.post.FC_QOP_SHOW_MODE) && $smarty.post.FC_QOP_SHOW_MODE == '2') || (!isset($smarty.post.FC_QOP_SHOW_MODE) && $froggyquestiononproduct.FC_QOP_SHOW_MODE == '2')}selected="selected"{/if} data-text="link_text">{l s='In a page' mod='froggyquestiononproduct'}</option>
 			</select>
 		</div>
 		<div class="clear"></div>
 
 		<h3>{l s='Configure text' mod='froggyquestiononproduct'}</h3>
 
-		<label>{l s='Tab text' mod='froggyquestiononproduct'}</label>
-		<div class="margin-form">
-			{foreach from=$languages item=language}
-				<div id="tab_text_{$language['id_lang']}" style="display: {if $language['id_lang'] == $id_lang_default}block{else}none{/if};float: left;">
-					<input type="text" name="tab_text[{$language['id_lang']}]" id="tab_text_{$language['id_lang']}" size="50" value="{if isset($smarty.post.tab_text.{$language['id_lang']})}{$smarty.post.tab_text.{$language['id_lang']}|escape:'htmlall':'UTF-8'}{else}{$froggyquestiononproduct.FC_QOP_TAB_TEXT.{$language['id_lang']}}{/if}" />
-				</div>
-			{/foreach}
-			{$module->displayFlags($languages, $id_lang_default, $divLangName, 'tab_text', true)}
-			<div class="clear"></div>
-			<p class="preference_description">{l s='This text will be used on tab on product page' mod='froggyquestiononproduct'}</p>
+		<div id="tab_text-fields" class="text-fields">
+			<label>{l s='Tab text' mod='froggyquestiononproduct'}</label>
+			<div class="margin-form">
+				{foreach from=$languages item=language}
+					<div id="tab_text_{$language['id_lang']}" style="display: {if $language['id_lang'] == $id_lang_default}block{else}none{/if};float: left;">
+						<input type="text" name="tab_text[{$language['id_lang']}]" id="tab_text_{$language['id_lang']}" size="50" value="{if isset($smarty.post.tab_text.{$language['id_lang']})}{$smarty.post.tab_text.{$language['id_lang']}|escape:'htmlall':'UTF-8'}{else}{$froggyquestiononproduct.FC_QOP_TAB_TEXT.{$language['id_lang']}}{/if}" />
+					</div>
+				{/foreach}
+				{$module->displayFlags($languages, $id_lang_default, $divLangName, 'tab_text', true)}
+				<div class="clear"></div>
+				<p class="preference_description">{l s='This text will be used on tab on product page' mod='froggyquestiononproduct'}</p>
+			</div>
 		</div>
 
-		<label>{l s='Link text' mod='froggyquestiononproduct'}</label>
-		<div class="margin-form">
-			{foreach from=$languages item=language}
-				<div id="link_text_{$language['id_lang']}" style="display: {if $language['id_lang'] == $id_lang_default}block{else}none{/if};float: left;">
-					<input type="text" name="link_text[{$language['id_lang']}]" id="link_text_{$language['id_lang']}" size="50" value="{if isset($smarty.post.link_text.{$language['id_lang']})}{$smarty.post.link_text.{$language['id_lang']}|escape:'htmlall':'UTF-8'}{else}{$froggyquestiononproduct.FC_QOP_LINK_TEXT.{$language['id_lang']}}{/if}" />
-				</div>
-			{/foreach}
-			{$module->displayFlags($languages, $id_lang_default, $divLangName, 'link_text', true)}
-			<div class="clear"></div>
-			<p class="preference_description">{l s='This text will be used on link on product page' mod='froggyquestiononproduct'}</p>
+		<div id="link_text-fields" class="text-fields">
+			<label>{l s='Link text' mod='froggyquestiononproduct'}</label>
+			<div class="margin-form">
+				{foreach from=$languages item=language}
+					<div id="link_text_{$language['id_lang']}" style="display: {if $language['id_lang'] == $id_lang_default}block{else}none{/if};float: left;">
+						<input type="text" name="link_text[{$language['id_lang']}]" id="link_text_{$language['id_lang']}" size="50" value="{if isset($smarty.post.link_text.{$language['id_lang']})}{$smarty.post.link_text.{$language['id_lang']}|escape:'htmlall':'UTF-8'}{else}{$froggyquestiononproduct.FC_QOP_LINK_TEXT.{$language['id_lang']}}{/if}" />
+					</div>
+				{/foreach}
+				{$module->displayFlags($languages, $id_lang_default, $divLangName, 'link_text', true)}
+				<div class="clear"></div>
+				<p class="preference_description">{l s='This text will be used on link on product page' mod='froggyquestiononproduct'}</p>
+			</div>
 		</div>
 
 		<hr />
