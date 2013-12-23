@@ -19,8 +19,8 @@
 
 $(function() {
 	$('#froggy-qop-fancybox').fancybox({
-		'width': '550',
-		'height': '260',
+		'width': '650',
+		'height': '300',
 		'autoDimensions' : false
 	});
 });
