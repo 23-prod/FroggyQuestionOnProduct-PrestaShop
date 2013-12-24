@@ -17,27 +17,41 @@
 *  @copyright  2013-2014 Froggy Commerce
 *}
 
-<form class="froggy-qop-form" action="{$link->getModuleLink('froggyquestiononproduct', 'form')}&id_product={$id_product}" method="post">
+<form class="froggy-qop-form" action="{$link->getModuleLink('froggyquestiononproduct', 'form')}&id_product={$id_product}" method="post" data-in-fancy="{if isset($in_fancy)}1{else}0{/if}">
 
 	{if !isset($in_page)}
-		<p><b>{l s='Please enter below your question about : '}</b> {$product->name}</p>
+		<div class="success" style="display: none;">
+			<p>{l s='Your question has been sended !' mod='froggyquestiononproduct'}</p>
+		</div>
+		<div class="error" style="display: none;">
+			<p>{l s='Some errors occured:' mod='froggyquestiononproduct'}</p>
+			<ol class="error-list"></ol>
+		</div>
+		<input type="hidden" name="ajax" value="1" />
+		<input type="hidden" name="submitQuestion" value="1" />
 	{/if}
 
-	{if !$isLogged}
-		<label for="email">{l s='Your e-mail address' mod='froggyquestiononproduct'}</label>
-		<input type="text" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email|escape:'htmlall':'UTF-8'}{/if}" size="40" placeholder="{l s='your@email' mod='froggyquestiononproduct'}" />
+	<div id="froggy-qop-form-container">
+		{if !isset($in_page)}
+			<p><b>{l s='Please enter below your question about : '}</b> {$product->name}</p>
+		{/if}
+
+		{if !$isLogged}
+			<label for="email">{l s='Your e-mail address' mod='froggyquestiononproduct'}</label>
+			<input type="text" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email|escape:'htmlall':'UTF-8'}{/if}" size="40" placeholder="{l s='your@email' mod='froggyquestiononproduct'}" />
+			<div class="clearBoth"></div>
+		{/if}
+
+		<label for="message">{l s='Your question' mod='froggyquestiononproduct'}</label>
+		<textarea name="message" placeholder="{l s='Type your question here...' mod='froggyquestiononproduct'}">{if isset($smarty.post.message)}{$smarty.post.message|escape:'htmlall':'UTF-8'}{/if}</textarea>
 		<div class="clearBoth"></div>
-	{/if}
 
-	<label for="message">{l s='Your question' mod='froggyquestiononproduct'}</label>
-	<textarea name="message" placeholder="{l s='Type your question here...' mod='froggyquestiononproduct'}">{if isset($smarty.post.message)}{$smarty.post.message|escape:'htmlall':'UTF-8'}{/if}</textarea>
-	<div class="clearBoth"></div>
+		<hr class="froggy-qop" />
 
-	<hr class="froggy-qop" />
-
-	<div class="center">
-		<input type="hidden" name="id_product" value="{$id_product}" />
-		<input class="button" type="submit" name="submitQuestion" value="{l s='Send' mod='froggyquestiononproduct'}" />
+		<div class="center">
+			<input type="hidden" name="id_product" value="{$id_product}" />
+			<input class="button" type="submit" name="submitQuestion" value="{l s='Send' mod='froggyquestiononproduct'}" />
+		</div>
 	</div>
 
 </form>

@@ -87,6 +87,14 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
 						$this->errors[] = Tools::displayError('An error occurred while sending the message.');
 					}
 				}
+
+				if (Tools::getIsset('ajax')) {
+					echo json_encode(array(
+						'has_errors' => (bool)count($this->errors),
+						'errors' => $this->errors
+					));
+					exit;
+				}
 			}
 		}
 

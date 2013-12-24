@@ -18,9 +18,43 @@
  */
 
 $(function() {
-	$('#froggy-qop-fancybox').fancybox({
-		'width': '650',
-		'height': '300',
-		'autoDimensions' : false
+	if ($('.froggy-qop-form').data('in-fancy')) {
+		$('#froggy-qop-fancybox').fancybox({
+			'width': '650',
+			'height': '300',
+			'autoDimensions' : false
+		});
+	}
+
+	$('.froggy-qop-form').submit(function(e) {
+		e.preventDefault();
+
+		var $error_container = $('.froggy-qop-form').find('.error');
+		var $success_container = $('.froggy-qop-form').find('.success');
+		var $error_list = $error_container.find('.error-list');
+		$error_container.hide();
+		$success_container.hide();
+		$error_list.html('');
+
+		$.ajax({
+			type: "POST",
+			url: $('.froggy-qop-form').attr('action'),
+			data: $('.froggy-qop-form').serialize(),
+			dataType: "JSON"
+		}).done(function( data ) {
+			if (data.has_errors) {
+
+				$.each(data.errors, function(key, value) {
+					$error_list.append(
+						$('<li/>').html(value)
+					);
+				});
+
+				$('.froggy-qop-form').find('.error').show();
+			} else {
+				$success_container.show();
+				$('#froggy-qop-form-container').hide();
+			}
+		});
 	});
 });
