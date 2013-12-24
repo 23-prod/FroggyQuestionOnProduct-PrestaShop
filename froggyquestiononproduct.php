@@ -81,7 +81,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 			'module' => $this
 		));
 
-		return $this->display(__FILE__, 'getcontent.tpl');
+		return $this->fcdisplay(__FILE__, 'getcontent.tpl');
 	}
 
 	/**
@@ -119,7 +119,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 			$this->context->smarty->assign(array(
 				'tab_text' => Configuration::get('FC_QOP_TAB_TEXT', $this->context->language->id)
 			));
-			return $this->display(__FILE__, 'hookDisplayProductTab.tpl');
+			return $this->fcdisplay(__FILE__, 'hookDisplayProductTab.tpl');
 		}
 	}
 
@@ -143,7 +143,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id)
 			));
 
-			return $this->display(__FILE__, 'hookDisplayProductTabContent.tpl');
+			return $this->fcdisplay(__FILE__, 'hookDisplayProductTabContent.tpl');
 		}
 	}
 
@@ -169,7 +169,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id),
 				'in_fancy' => $this->isInFancybox()
 			));
-			return $this->display(__FILE__, 'hookDisplayRightColumnProduct.tpl');
+			return $this->fcdisplay(__FILE__, 'hookDisplayRightColumnProduct.tpl');
 		}
 		return null;
 	}

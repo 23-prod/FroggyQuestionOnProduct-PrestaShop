@@ -55,6 +55,21 @@ class FroggyModule extends Module
 				$this->$key = $definitions[$key];
 			}
 		}
+
+		// If PS version is lower than 1.5, call backward script
+		if (version_compare(_PS_VERSION_, '1.5') < 0)
+			require(dirname(__FILE__).'/FroggyBackward.php');
+
+		// Define local path if not exists (1.4 compatibility)
+		if (!isset($this->local_path))
+			$this->local_path = substr(dirname(__FILE__), 0, strrpos(dirname(__FILE__), '/')).'/';
+
+		// 1.4 retrocompatibility
+		if (!isset($this->context->smarty_methods['FroggyGetAdminLink']))
+		{
+			smartyRegisterFunction($this->context->smarty, 'function', 'FroggyGetAdminLink', 'FroggyGetAdminLink');
+			$this->context->smarty_methods['FroggyGetAdminLink'] = true;
+		}
 	}
 
 	/**
@@ -79,6 +94,12 @@ class FroggyModule extends Module
 				throw new Exception('Hook processor cannot be used !');
 			}
 		}
+
+		// Search for new hook name match
+		$new_hook_method = str_replace('hook', 'hookDisplay', $method);
+		if (method_exists($this, $new_hook_method))
+			return $this->{$new_hook_method}(array_pop($args));
+
 		return null;
 	}
 
@@ -122,7 +143,7 @@ class FroggyModule extends Module
 			if (!$this->deleteModuleControllers()) return false;
 			if (!$this->runDefinitionsSql('uninstall')) return false;
 		}
-		return false;
+		return true;
 	}
 
 	/**
@@ -327,7 +348,7 @@ class FroggyModule extends Module
 	 * @param null $compileId
 	 * @return mixed
 	 */
-	public function display($file, $template, $cacheId = null, $compileId = null)
+	public function fcdisplay($file, $template, $cacheId = null, $compileId = null)
 	{
 		// If PS 1.6 or greater, we choose bootstrap template
 		if (version_compare(_PS_VERSION_, '1.6.0') >= 0)
@@ -337,8 +358,11 @@ class FroggyModule extends Module
 				$template = $template_bootstrap;
 		}
 
-		// Call parent display method
-		return parent::display($file, $template, $cacheId, $compileId);
+		// On PS 1.4, we have to show him the path
+		if (version_compare(_PS_VERSION_, '1.5') < 0)
+			return parent::display($file, 'views/templates/hook/'.$template, $cacheId, $compileId);
+		else
+			return parent::display($file, $template, $cacheId, $compileId);
 	}
 }
 
@@ -390,4 +414,35 @@ interface FroggyHookProcessorInterface
 	 */
 	public function run();
 
+}
+
+
+
+/***** Multi compliancy methods *****/
+
+function FroggyGetAdminLink($params, &$smarty)
+{
+	// In 1.5, we use getAdminLink method
+	if (version_compare(_PS_VERSION_, '1.5.0') >= 0)
+		return Context::getContext()->link->getAdminLink($params['a']);
+
+	// Match compatibility between 1.4 and 1.5
+	$match = array(
+		'AdminProducts' => 'AdminCatalog',
+		'AdminCategories' => 'AdminCatalog',
+		'AdminCmsContent' => 'AdminCMSContent',
+	);
+	if (isset($match[$params['a']]))
+		$params['a'] = $match[$params['a']];
+
+	// In 1.4, we build it with cookie for back office or with argument for front office (see froggytoolbar)
+	global $cookie;
+	$tab = $params['a'];
+	$id_employee = $cookie->id_employee;
+	if (isset($params['e']))
+		$id_employee = $params['e'];
+	$token = Tools::getAdminToken($tab.(int)Tab::getIdFromClassName($tab).(int)$id_employee);
+
+	// Return link
+	return 'index.php?tab='.$tab.'&token='.$token;
 }
