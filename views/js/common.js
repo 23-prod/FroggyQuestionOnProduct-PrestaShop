@@ -26,7 +26,7 @@ $(function() {
 		});
 	}
 
-	$('.froggy-qop-form').submit(function(e) {
+	$('.froggy-qop-form').not('.in-page').submit(function(e) {
 		e.preventDefault();
 
 		var $error_container = $('.froggy-qop-form').find('.error');

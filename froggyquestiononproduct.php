@@ -115,6 +115,10 @@ class FroggyQuestionOnProduct extends FroggyModule
 			return;
 		}
 
+		if (version_compare(_PS_VERSION_, '1.6.0') >= 0) {
+			return;
+		}
+
 		if ($this->isInTab()) {
 			$this->context->smarty->assign(array(
 				'tab_text' => Configuration::get('FC_QOP_TAB_TEXT', $this->context->language->id)
@@ -140,7 +144,8 @@ class FroggyQuestionOnProduct extends FroggyModule
 			$this->context->smarty->assign(array(
 				'isLogged' => $this->isCustomerLogged(),
 				'id_product' => Tools::getValue('id_product'),
-				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id)
+				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id),
+				'tab_text' => Configuration::get('FC_QOP_TAB_TEXT', $this->context->language->id)
 			));
 
 			return $this->fcdisplay(__FILE__, 'hookDisplayProductTabContent.tpl');

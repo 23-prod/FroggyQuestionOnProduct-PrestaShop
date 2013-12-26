@@ -115,7 +115,11 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
 			'product' => $product
 		));
 
-		return $this->setTemplate('form.tpl');
+		if (version_compare(_PS_VERSION_, '1.6.0') >= 0) {
+			return $this->setTemplate('form.bootstrap.tpl');
+		} else {
+			return $this->setTemplate('form.tpl');
+		}
 	}
 
 }

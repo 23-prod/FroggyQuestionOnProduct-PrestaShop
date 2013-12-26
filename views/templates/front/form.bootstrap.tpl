@@ -41,5 +41,5 @@
 		<p><a href="{$link->getProductLink($product)}">{l s='Return to product' mod='froggyquestiononproduct'}</a></p>
 	</div>
 {else}
-	{include file='../include/form.tpl' in_page=true}
+	{include file='../include/form.bootstrap.tpl' in_page=true}
 {/if}

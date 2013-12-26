@@ -69,7 +69,7 @@
 			<div class="form-group">
 				<label class="control-label col-lg-3">{l s='Show mode' mod='froggyquestiononproduct'} <sup class="required">*</sup></label>
 				<div class="col-lg-9">
-					<select name="FC_QOP_SHOW_MODE">
+					<select name="FC_QOP_SHOW_MODE" id="show-mode">
 						<option value="0" {if (isset($smarty.post.FC_QOP_SHOW_MODE) && $smarty.post.FC_QOP_SHOW_MODE == '0') || (!isset($smarty.post.FC_QOP_SHOW_MODE) && $froggyquestiononproduct.FC_QOP_SHOW_MODE == '0')}selected="selected"{/if} data-text="link_text">{l s='In a pop-in' mod='froggyquestiononproduct'}</option>
 						<option value="1" {if (isset($smarty.post.FC_QOP_SHOW_MODE) && $smarty.post.FC_QOP_SHOW_MODE == '1') || (!isset($smarty.post.FC_QOP_SHOW_MODE) && $froggyquestiononproduct.FC_QOP_SHOW_MODE == '1')}selected="selected"{/if} data-text="tab_text">{l s='In a product tab' mod='froggyquestiononproduct'}</option>
 						<option value="2" {if (isset($smarty.post.FC_QOP_SHOW_MODE) && $smarty.post.FC_QOP_SHOW_MODE == '2') || (!isset($smarty.post.FC_QOP_SHOW_MODE) && $froggyquestiononproduct.FC_QOP_SHOW_MODE == '2')}selected="selected"{/if} data-text="link_text">{l s='In a page' mod='froggyquestiononproduct'}</option>
