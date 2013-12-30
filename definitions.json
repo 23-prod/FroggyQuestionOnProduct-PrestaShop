@@ -5,6 +5,7 @@
 
 	"hooks": [
 		"displayHeader",
+		"displayProductButtons",
 		"displayRightColumnProduct",
 		"displayProductTab",
 		"displayProductTabContent",

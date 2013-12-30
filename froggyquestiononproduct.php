@@ -161,22 +161,25 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookDisplayRightColumnProduct($params)
 	{
-		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
+		if (version_compare(_PS_VERSION_, '1.6.0') >= 0) {
 			return;
 		}
+		return $this->processProductRightColumn();
+	}
 
-		if (!$this->isInTab()) {
-			$this->context->smarty->assign(array(
-				'link_text' => Configuration::get('FC_QOP_LINK_TEXT', $this->context->language->id),
-				'module_path' => $this->_path,
-				'isLogged' => $this->isCustomerLogged(),
-				'id_product' => Tools::getValue('id_product'),
-				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id),
-				'in_fancy' => $this->isInFancybox()
-			));
-			return $this->fcdisplay(__FILE__, 'hookDisplayRightColumnProduct.tpl');
+	/**
+	 * Hook DisplayProductButtons
+	 * Uses in order to show link that allow open fancybox
+	 *
+	 * @param $params
+	 * @return string display for this hook
+	 */
+	public function hookDisplayProductButtons($params)
+	{
+		if (version_compare(_PS_VERSION_, '1.6.0') < 0) {
+			return;
 		}
-		return null;
+		return $this->processProductRightColumn();
 	}
 
 	/**
@@ -187,8 +190,9 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookActionAdminControllerSetMedia($params)
 	{
-		if (strtolower(Tools::getValue('controller')) == 'adminmodules' && Tools::getValue('configure') == $this->name)
+		if (strtolower(Tools::getValue('controller')) == 'adminmodules' && Tools::getValue('configure') == $this->name) {
 			$this->context->controller->addJs($this->_path.'views/js/backend.js');
+		}
 	}
 
 	/**
@@ -242,6 +246,29 @@ class FroggyQuestionOnProduct extends FroggyModule
 			} else {
 				return false;
 			}
+		}
+		return null;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	protected function processProductRightColumn()
+	{
+		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
+			return;
+		}
+
+		if (!$this->isInTab()) {
+			$this->context->smarty->assign(array(
+				'link_text' => Configuration::get('FC_QOP_LINK_TEXT', $this->context->language->id),
+				'module_path' => $this->_path,
+				'isLogged' => $this->isCustomerLogged(),
+				'id_product' => Tools::getValue('id_product'),
+				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id),
+				'in_fancy' => $this->isInFancybox()
+			));
+			return $this->fcdisplay(__FILE__, 'hookDisplayProductButtons.tpl');
 		}
 		return null;
 	}
