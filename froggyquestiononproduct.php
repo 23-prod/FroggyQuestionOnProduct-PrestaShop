@@ -149,27 +149,18 @@ class FroggyQuestionOnProduct extends FroggyModule
 	}
 
 	/**
-	 * @param $params
-	 * @return mixed
-	 */
-	public function hookProductActions($params)
-	{
-		return $this->processProductRightColumn();
-	}
-
-	/**
-	 * Hook DisplayRightColumnProduct
+	 * Hook DisplayLeftColumnProduct
 	 * Uses in order to show link that allow open fancybox
 	 *
 	 * @param $params
 	 * @return string display for this hook
 	 */
-	public function hookDisplayRightColumnProduct($params)
+	public function hookDisplayLeftColumnProduct($params)
 	{
 		if (version_compare(_PS_VERSION_, '1.6.0') >= 0) {
 			return;
 		}
-		return $this->processProductRightColumn();
+		return $this->processProductButtons();
 	}
 
 	/**
@@ -184,7 +175,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 		if (version_compare(_PS_VERSION_, '1.6.0') < 0) {
 			return;
 		}
-		return $this->processProductRightColumn();
+		return $this->processProductButtons();
 	}
 
 	/**
@@ -258,7 +249,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 	/**
 	 * @return mixed
 	 */
-	protected function processProductRightColumn()
+	protected function processProductButtons()
 	{
 		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
 			return;
@@ -311,4 +302,13 @@ class FroggyQuestionOnProduct extends FroggyModule
 	{
 		return (bool)$this->context->customer->id;
 	}
+
+
+	/**
+	 * Backward 1.4
+	 */
+	public function hookHeader($params) { return $this->hookDisplayHeader($params); }
+	public function hookExtraLeft($params) { return $this->hookDisplayLeftColumnProduct($params); }
+	public function hookProductTab($params) { return $this->hookDisplayProductTab($params); }
+	public function hookProductTabContent($params) { return $this->hookDisplayProductTabContent($params); }
 }

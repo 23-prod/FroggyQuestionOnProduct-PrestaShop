@@ -17,7 +17,7 @@
 *  @copyright  2013-2014 Froggy Commerce
 *}
 
-<p class="froggy-qop-link">
+<li class="froggy-qop-link">
 	{if $in_fancy}
 		<a id="froggy-qop-fancybox" href="#froggy-qop-fancybox-content">
 			<img src="{$module_path}/views/img/help.png" alt="" /> {$link_text}
@@ -27,12 +27,12 @@
 			<img src="{$module_path}/views/img/help.png" alt="" /> {$link_text}
 		</a>
 	{/if}
-</p>
 
-{if $in_fancy}
-	<div style="display: none;">
-		<div id="froggy-qop-fancybox-content">
-			{include file='../include/form.tpl'}
+	{if $in_fancy}
+		<div style="display: none;">
+			<div id="froggy-qop-fancybox-content">
+				{include file='../include/form.tpl'}
+			</div>
 		</div>
-	</div>
-{/if}
+	{/if}
+</li>
