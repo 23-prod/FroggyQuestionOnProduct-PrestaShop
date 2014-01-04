@@ -17,7 +17,7 @@
 *  @copyright  2013-2014 Froggy Commerce
 *}
 
-<form class="froggy-qop-form{if isset($in_page)} in-page{/if}" action="{$link->getModuleLink('froggyquestiononproduct', 'form')}&id_product={$id_product}" method="post" data-in-fancy="{if isset($in_fancy)}1{else}0{/if}">
+<form class="froggy-qop-form{if isset($in_page)} in-page{/if}" action="{$controller_href}&id_product={$id_product}" method="post" data-in-fancy="{if isset($in_fancy)}1{else}0{/if}">
 
 	{if !isset($in_page)}
 		<div class="success" style="display: none;">

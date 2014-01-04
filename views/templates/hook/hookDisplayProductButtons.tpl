@@ -23,7 +23,7 @@
 			<img src="{$module_path}/views/img/help.png" alt="" /> {$link_text}
 		</a>
 	{else}
-		<a id="froggy-qop-fancybox" href="{$link->getModuleLink('froggyquestiononproduct', 'form')}&id_product={$id_product}">
+		<a id="froggy-qop-fancybox" href="{$controller_href}&id_product={$id_product}">
 			<img src="{$module_path}/views/img/help.png" alt="" /> {$link_text}
 		</a>
 	{/if}

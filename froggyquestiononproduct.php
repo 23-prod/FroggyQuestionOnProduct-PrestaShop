@@ -93,11 +93,6 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookDisplayHeader($params)
 	{
-		// If we want use a Fancybox
-		if ($this->isInFancybox()) {
-			$this->context->controller->addCSS(_PS_CSS_DIR_.'jquery.fancybox-1.3.4.css', 'screen');
-			$this->context->controller->addJqueryPlugin('fancybox');
-		}
 		$this->context->controller->addJS($this->_path.'views/js/common.js');
 		$this->context->controller->addCSS($this->_path.'views/css/frontend.css');
 	}
@@ -145,11 +140,21 @@ class FroggyQuestionOnProduct extends FroggyModule
 				'isLogged' => $this->isCustomerLogged(),
 				'id_product' => Tools::getValue('id_product'),
 				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id),
-				'tab_text' => Configuration::get('FC_QOP_TAB_TEXT', $this->context->language->id)
+				'tab_text' => Configuration::get('FC_QOP_TAB_TEXT', $this->context->language->id),
+				'controller_href' => $this->getModuleLink('form')
 			));
 
 			return $this->fcdisplay(__FILE__, 'hookDisplayProductTabContent.tpl');
 		}
+	}
+
+	/**
+	 * @param $params
+	 * @return mixed
+	 */
+	public function hookProductActions($params)
+	{
+		return $this->processProductRightColumn();
 	}
 
 	/**
@@ -262,6 +267,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 		if (!$this->isInTab()) {
 			$this->context->smarty->assign(array(
 				'link_text' => Configuration::get('FC_QOP_LINK_TEXT', $this->context->language->id),
+				'controller_href' => $this->getModuleLink('form'),
 				'module_path' => $this->_path,
 				'isLogged' => $this->isCustomerLogged(),
 				'id_product' => Tools::getValue('id_product'),
