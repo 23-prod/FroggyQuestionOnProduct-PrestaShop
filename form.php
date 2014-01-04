@@ -22,9 +22,10 @@ $useSSL = false;
 
 require_once(dirname(__FILE__).'/../../config/config.inc.php');
 require_once(dirname(__FILE__).'/froggyquestiononproduct.php');
-require_once(dirname(__FILE__).'/../../header.php');
+require_once(dirname(__FILE__).'/froggy/FroggyContext.php');
+if (!Tools::getIsset('ajax')) require_once(dirname(__FILE__).'/../../header.php');
 
-$context = Context::getContext();
+$context = FroggyContext::getContext();
 $module = new FroggyQuestionOnProduct();
 $errors = array();
 
@@ -103,9 +104,11 @@ $context->smarty->assign(array(
 	'in_page' => true,
 	'isLogged' => $module->isCustomerLogged(),
 	'id_product' => Tools::getValue('id_product'),
-	'product' => $product
+	'product' => $product,
+	'controller_href' => $module->getModuleLink('form'),
+	'errors' => $errors
 ));
 
 $context->smarty->display(dirname(__FILE__).'/views/templates/front/form.tpl');
 
-require_once(dirname(__FILE__).'/../../footer.php');
+if (!Tools::getIsset('ajax')) require_once(dirname(__FILE__).'/../../footer.php');

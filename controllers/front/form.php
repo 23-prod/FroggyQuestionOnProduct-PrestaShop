@@ -112,7 +112,8 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
 			'in_page' => true,
 			'isLogged' => $this->module->isCustomerLogged(),
 			'id_product' => Tools::getValue('id_product'),
-			'product' => $product
+			'product' => $product,
+			'controller_href' => $this->module->getModuleLink('form')
 		));
 
 		if (version_compare(_PS_VERSION_, '1.6.0') >= 0) {

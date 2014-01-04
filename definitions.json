@@ -3,14 +3,25 @@
 	"version": "1.0",
 	"need_instance": 0,
 
-	"hooks": [
-		"displayHeader",
-		"displayProductButtons",
-		"displayRightColumnProduct",
-		"displayProductTab",
-		"displayProductTabContent",
-		"actionAdminControllerSetMedia"
-	],
+	"hooks": {
+		"all" : [
+			"header",
+			"productTab",
+			"productTabContent"
+		],
+		"1.4" : [
+			"extraLeft",
+			"backOfficeHeader"
+		],
+		"1.5" : [
+			"displayLeftColumnProduct",
+			"actionAdminControllerSetMedia"
+		],
+		"1.6" : [
+			"productButtons",
+			"actionAdminControllerSetMedia"
+		]
+	},
 
 	"configurations" : {
 		"FC_QOP_SHOW_MODE" : "1",
