@@ -307,6 +307,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 	/**
 	 * Backward 1.4
 	 */
+	public function hookBackOfficeHeader($params) { return '<script type="text/javascript" src="'.$this->_path.'views/js/backend.js"></script>'; }
 	public function hookHeader($params) { return $this->hookDisplayHeader($params); }
 	public function hookExtraLeft($params) { return $this->hookDisplayLeftColumnProduct($params); }
 	public function hookProductTab($params) { return $this->hookDisplayProductTab($params); }
