@@ -11,6 +11,9 @@ $_MODULE['<{froggyquestiononproduct}prestashop>form_da3e413ae5dde1a6b986203857fb
 $_MODULE['<{froggyquestiononproduct}prestashop>form_dd589a9d9126ea3686b498928e6d5dd3'] = 'Votre adresse e-mail est invalide';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_1feda27e58e6ddaa9080707ac0ab9368'] = 'Votre message est invalide';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_76f54358a2f4a7018fd8fd9588ae8a5a'] = 'Un client a une question à propos d\'un produit...';
+$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_ea1c6089a51afd440f6a36bf2f3b9316'] = 'Envoyez une question à propos d\'un produit';
+$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_42eaebcf955190674cc30a358378792d'] = 'Votre question a bien été envoyée !';
+$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_14b53364903a898d059fdebe8f479cdf'] = 'Retourner sur la fiche produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_41e5219a3211ae95e50335a3de7cb5d9'] = 'Question à propos d\'un produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_ea1c6089a51afd440f6a36bf2f3b9316'] = 'Envoyez une question à propos d\'un produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_42eaebcf955190674cc30a358378792d'] = 'Votre question a bien été envoyée !';
@@ -54,8 +57,15 @@ $_MODULE['<{froggyquestiononproduct}prestashop>getcontent_63a11faa3a692d4e00fa8e
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent_de7f58552cd4768cefb7a2d4e3f5bea0'] = 'Ce texte sera utilisé pour le lien qui sera affiché sur la fiche produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent_c9cc8cce247e49bae79f15173ce97354'] = 'Enregistrer';
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent_70397c4b252a5168c5ec003931cea215'] = 'Champs requis';
+$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_de4e7842086980734d4103abad25829e'] = 'Des erreurs se sont produites:';
+$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_4a2098239b24e008221141d29a39ec88'] = 'Merci de renseigner ci-dessous votre question à propos de :';
+$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_bc82c84acc0c68f760ecd5bac0dddc7d'] = 'Votre adresse e-mail';
+$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_cfcd33342f203056227af2185aa8c895'] = 'votre@email';
+$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_352519cba02e5e9ce17b9477a012e87c'] = 'Votre question';
+$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_1110458ddaad118ff15b5b9c2066c394'] = 'Tapez votre question ici...';
+$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_94966d90747b97d1f0f206c98a8b1ac3'] = 'Envoyer';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_de4e7842086980734d4103abad25829e'] = 'Des erreurs se sont produites:';
-$_MODULE['<{froggyquestiononproduct}prestashop>form_4a2098239b24e008221141d29a39ec88'] = 'Merci de renseigner  ci-dessous votre question à propos de :';
+$_MODULE['<{froggyquestiononproduct}prestashop>form_4a2098239b24e008221141d29a39ec88'] = 'Merci de renseigner ci-dessous votre question à propos de :';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_bc82c84acc0c68f760ecd5bac0dddc7d'] = 'Votre adresse e-mail';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_cfcd33342f203056227af2185aa8c895'] = 'votre@email';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_352519cba02e5e9ce17b9477a012e87c'] = 'Votre question';
