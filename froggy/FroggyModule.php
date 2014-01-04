@@ -128,6 +128,7 @@ class FroggyModule extends Module
 			}
 			return true;
 		}
+
 		return false;
 	}
 
@@ -178,8 +179,18 @@ class FroggyModule extends Module
 	protected function registerDefinitionsHooks()
 	{
 		if (isset($this->hooks) && is_array($this->hooks)) {
-			foreach ($this->hooks as $hook) {
-				if (!$this->registerHook($hook)) return false;
+			$versions = array_keys($this->hooks);
+			$key = 0;
+			foreach ($this->hooks as $version => $hooks) {
+				if (
+					$version == 'all' ||
+					(version_compare(_PS_VERSION_, $version) >= 0 && (!isset($versions[$key+1]) || (isset($versions[$key+1]) && version_compare(_PS_VERSION_, $versions[$key+1]) < 0)))
+				) {
+					foreach ($hooks as $hook) {
+						if (!$this->registerHook($hook)) return false;
+					}
+				}
+				$key++;
 			}
 		}
 		return true;
@@ -328,7 +339,7 @@ class FroggyModule extends Module
 		$languages = Language::getLanguages(false);
 
 		foreach ($this->getModuleConfigurationsKeys() as $key) {
-			if (Configuration::isLangKey($key)) {
+			if ($this->isConfigurationLangKey($key)) {
 				foreach ($languages as $lang) {
 					$configurations[$key][$lang['id_lang']] = Configuration::get($key, $lang['id_lang']);
 				}
@@ -363,6 +374,41 @@ class FroggyModule extends Module
 			return parent::display($file, 'views/templates/hook/'.$template, $cacheId, $compileId);
 		else
 			return parent::display($file, $template, $cacheId, $compileId);
+	}
+
+	/**
+	 * Backwrd method in order to replace Configuration::isLangKey($key)
+	 *
+	 * @param $key
+	 * @return bool
+	 */
+	protected function isConfigurationLangKey($key) {
+		if (version_compare(_PS_VERSION_, '1.5') >= 0) {
+			return Configuration::isLangKey($key);
+		} else {
+			return (bool)Db::getInstance()->getValue('
+				SELECT COUNT(1)
+				FROM `'._DB_PREFIX_.'configuration_lang` cl
+				LEFT JOIN `'._DB_PREFIX_.'configuration` c ON (cl.`id_configuration` = c.`id_configuration`)
+				WHERE c.`name` = \''.pSQL($key).'\'');
+		}
+	}
+
+	/**
+	 * Backward method for module controller link
+	 *
+	 * @param $controller_name
+	 * @return string
+	 */
+	protected function getModuleLink($controller_name)
+	{
+		if (version_compare(_PS_VERSION_, '1.5') >= 0) {
+			$link = $this->context->link->getModuleLink($this->name, $controller_name);
+		} else {
+			// In 1.4 version, you need to create a PHP file in order to call the controller
+			$link = $this->_path.$controller_name.'.php?';
+		}
+		return $link;
 	}
 }
 
