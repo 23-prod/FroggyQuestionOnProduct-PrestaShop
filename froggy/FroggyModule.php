@@ -79,26 +79,40 @@ class FroggyModule extends Module
 	 */
 	public function __call($method, $args)
 	{
-		// Build name of class
-		$processor_classname = get_class($this).ucfirst($method).'Processor';
-		$processor_class_path = $this->local_path.'/hooks/'.$processor_classname.'.php';
+		// Check alternative hook method name for both method in main class and hook processor
+		$hook_methods = array($method, str_replace('hook', 'hookDisplay', $method));
+		foreach ($hook_methods as $method)
+		{
+			// Build name of class
+			$processor_classname = get_class($this).ucfirst($method).'Processor';
+			$processor_class_path = $this->local_path.'/hooks/'.$processor_classname.'.php';
 
-		// Check if processor class exists
-		if (file_exists($processor_class_path)) {
-			require $processor_class_path;
-			if (class_exists($processor_classname) && $processor_classname instanceof FroggyHookProcessorInterface) {
-				$processor = new $processor_classname($this, $args);
-				return $processor->run();
-			} else {
-				// If processor class not implement interface
-				throw new Exception('Hook processor cannot be used !');
+			// Check if processor class exists
+			if (file_exists($processor_class_path)) {
+				require $processor_class_path;
+				if (class_exists($processor_classname)) {
+					$args = array(
+						'module' => $this,
+						'context' => $this->context,
+						'smarty' => $this->smarty,
+						'path' => $this->_path,
+						'params' => array_pop($args),
+					);
+					$processor = new $processor_classname($args);
+					if ($processor instanceof FroggyHookProcessor)
+						return $processor->run();
+					else
+						throw new Exception('Hook processor must extends "FroggyHookProcessor" class!');
+				} else {
+					// If processor class not implement interface
+					throw new Exception('Hook processor cannot be used !');
+				}
 			}
-		}
 
-		// Search for new hook name match
-		$new_hook_method = str_replace('hook', 'hookDisplay', $method);
-		if (method_exists($this, $new_hook_method))
-			return $this->{$new_hook_method}(array_pop($args));
+			// Search for new hook name match
+			if (method_exists($this, $method))
+				return $this->{$hook_method}(array_pop($args));
+		}
 
 		return null;
 	}
@@ -143,8 +157,9 @@ class FroggyModule extends Module
 			if (!$this->deleteConfigurations()) return false;
 			if (!$this->deleteModuleControllers()) return false;
 			if (!$this->runDefinitionsSql('uninstall')) return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	/**
@@ -361,6 +376,14 @@ class FroggyModule extends Module
 	 */
 	public function fcdisplay($file, $template, $cacheId = null, $compileId = null)
 	{
+		// Make fcdisplay compliant with hook processor
+		if (substr(dirname($file), - strlen('/hooks')) === '/hooks')
+		{
+			$file = dirname($file);
+			$file = substr($file, 0, strlen($file) - strlen('/hooks'));
+			$file = $file.'/'.basename($file).'.php';
+		}
+
 		// If PS 1.6 or greater, we choose bootstrap template
 		if (version_compare(_PS_VERSION_, '1.6.0') >= 0)
 		{
@@ -447,21 +470,26 @@ class FroggyDefinitionsModuleParser
 
 }
 
-interface FroggyHookProcessorInterface
+
+abstract class FroggyHookProcessor
 {
+	public $module;
+	public $context;
+	public $path;
+	public $smarty;
+	public $params;
 
 	/**
 	 * @param FroggyModule $module
+	 * @param array $args
 	 */
-	public function __construct(FroggyModule $module, array $args);
-
-	/**
-	 * @return mixed
-	 */
-	public function run();
-
+	public function __construct($args)
+	{
+		foreach ($args as $key => $value)
+			if (property_exists($this, $key))
+				$this->{$key} = $value;
+	}
 }
-
 
 
 /***** Multi compliancy methods *****/
