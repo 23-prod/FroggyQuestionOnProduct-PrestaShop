@@ -23,11 +23,11 @@
 	<legend><img src="{$froggyquestiononproduct.module_dir}logo.png" alt="" width="16" />{l s='Allow customer to ask a question on a product' mod='froggyquestiononproduct'}</legend>
 
 	{if $froggyquestiononproduct.post_process.result === true}
-		<div class="conf">
+		<div class="module_confirmation conf confirm alert alert-success">
 			{l s='Configurations saved with success !' mod='froggyquestiononproduct'}
 		</div>
 	{elseif $froggyquestiononproduct.post_process.result === false}
-		<div class="error">
+		<div class="module_confirmation conf confirm alert alert-danger">
 			<ul>
 				{foreach from=$froggyquestiononproduct.post_process.errors item=error}
 					<li>{$error}</li>
