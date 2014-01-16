@@ -33,7 +33,7 @@
 
 	<div id="froggy-qop-form-container">
 		{if !isset($in_page)}
-			<p><b>{l s='Please enter below your question about : '}</b> {$product->name}</p>
+			<p><b>{l s='Please enter below your question about :' mod='froggyquestiononproduct'}</b> {$product->name}</p>
 		{/if}
 
 		{if !$isLogged}
