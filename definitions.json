@@ -18,7 +18,7 @@
 			"actionAdminControllerSetMedia"
 		],
 		"1.6" : [
-			"productButtons",
+			"displayProductButtons",
 			"actionAdminControllerSetMedia"
 		]
 	},
