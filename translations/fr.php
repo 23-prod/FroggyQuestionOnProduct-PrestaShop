@@ -58,14 +58,14 @@ $_MODULE['<{froggyquestiononproduct}prestashop>getcontent_de7f58552cd4768cefb7a2
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent_c9cc8cce247e49bae79f15173ce97354'] = 'Enregistrer';
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent_70397c4b252a5168c5ec003931cea215'] = 'Champs requis';
 $_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_de4e7842086980734d4103abad25829e'] = 'Des erreurs se sont produites:';
-$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_4a2098239b24e008221141d29a39ec88'] = 'Renseignez ci-dessous votre question à propos de :';
+$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_951b49d30cd2434eb81e0044836e75d3'] = 'Renseignez votre question à propos du produit :';
 $_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_bc82c84acc0c68f760ecd5bac0dddc7d'] = 'Votre adresse e-mail';
 $_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_cfcd33342f203056227af2185aa8c895'] = 'votre@email';
 $_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_352519cba02e5e9ce17b9477a012e87c'] = 'Votre question';
 $_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_1110458ddaad118ff15b5b9c2066c394'] = 'Tapez votre question ici...';
 $_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_94966d90747b97d1f0f206c98a8b1ac3'] = 'Envoyer';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_de4e7842086980734d4103abad25829e'] = 'Des erreurs se sont produites:';
-$_MODULE['<{froggyquestiononproduct}prestashop>form_951b49d30cd2434eb81e0044836e75d3'] = 'Merci de renseigner votre question à propos du produit :';
+$_MODULE['<{froggyquestiononproduct}prestashop>form_951b49d30cd2434eb81e0044836e75d3'] = 'Renseignez votre question à propos du produit :';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_bc82c84acc0c68f760ecd5bac0dddc7d'] = 'Votre adresse e-mail';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_cfcd33342f203056227af2185aa8c895'] = 'votre@email';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_352519cba02e5e9ce17b9477a012e87c'] = 'Votre question';
