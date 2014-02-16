@@ -25,7 +25,7 @@
 <div class="froggy-qop-product">
 	<div class="f_left">
 		<a href="{$link->getProductLink($product)}" class="product_img_link" title="{$product->name|escape:'htmlall':'UTF-8'}">
-			<img src="{$link->getImageLink($product->link_rewrite, $product->id_image, 'home_default')}" alt="{$product->name|escape:'htmlall':'UTF-8'}" />
+			<img src="{$link->getImageLink($product->link_rewrite, $product->id_image, $image_format)}" alt="{$product->name|escape:'htmlall':'UTF-8'}" />
 		</a>
 	</div>
 	<h3><a href="{$link->getProductLink($product)}" title="{$product->name|escape:'htmlall':'UTF-8'}">{$product->name|escape:'htmlall':'UTF-8'|truncate:35:'...'}</a></h3>

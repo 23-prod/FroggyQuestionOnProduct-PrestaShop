@@ -21,6 +21,7 @@
 $useSSL = false;
 
 require_once(dirname(__FILE__).'/../../config/config.inc.php');
+require_once(dirname(__FILE__).'/../../init.php');
 require_once(dirname(__FILE__).'/froggyquestiononproduct.php');
 require_once(dirname(__FILE__).'/froggy/FroggyContext.php');
 if (!Tools::getIsset('ajax')) require_once(dirname(__FILE__).'/../../header.php');
@@ -106,7 +107,8 @@ $context->smarty->assign(array(
 	'id_product' => Tools::getValue('id_product'),
 	'product' => $product,
 	'controller_href' => $module->getModuleLink('form'),
-	'errors' => $errors
+	'errors' => $errors,
+	'image_format' => (version_compare(_PS_VERSION_, '1.5') < 0 ? 'home' : 'home_default')
 ));
 
 $context->smarty->display(dirname(__FILE__).'/views/templates/front/form.tpl');

@@ -72,3 +72,11 @@ hr.froggy-qop {
 	border: 1px solid #ccc;
 	margin-right: 10px;
 }
+
+.f_left {
+	float: left;
+}
+
+.clearBoth {
+	clear: both;
+}
