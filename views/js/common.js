@@ -40,20 +40,21 @@ $(function() {
 			type: "POST",
 			url: $('.froggy-qop-form').attr('action'),
 			data: $('.froggy-qop-form').serialize(),
-			dataType: "JSON"
-		}).done(function( data ) {
-			if (data.has_errors) {
+			dataType: 'json',
+			success: function( data ) {
+				if (data.has_errors) {
 
-				$.each(data.errors, function(key, value) {
-					$error_list.append(
-						$('<li/>').html(value)
-					);
-				});
+					$.each(data.errors, function(key, value) {
+						$error_list.append(
+							$('<li/>').html(value)
+						);
+					});
 
-				$('.froggy-qop-form').find('.error').show();
-			} else {
-				$success_container.show();
-				$('#froggy-qop-form-container').hide();
+					$('.froggy-qop-form').find('.error').show();
+				} else {
+					$success_container.show();
+					$('#froggy-qop-form-container').hide();
+				}
 			}
 		});
 	});

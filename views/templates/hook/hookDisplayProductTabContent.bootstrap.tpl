@@ -20,5 +20,5 @@
 <h3 class="page-product-heading">{$tab_text}</h3>
 
 <div id="idTabfroggyquestiononproduct">
-	{include file='../include/form.bootstrap.tpl'}
+	{include file="{$module_tpl_dir}/include/form.bootstrap.tpl"}
 </div>

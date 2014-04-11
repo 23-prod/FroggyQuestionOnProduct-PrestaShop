@@ -108,7 +108,8 @@ $context->smarty->assign(array(
 	'product' => $product,
 	'controller_href' => $module->getModuleLink('form'),
 	'errors' => $errors,
-	'image_format' => (version_compare(_PS_VERSION_, '1.5') < 0 ? 'home' : 'home_default')
+	'image_format' => (version_compare(_PS_VERSION_, '1.5') < 0 ? 'home' : 'home_default'),
+	'module_tpl_dir' => dirname(__FILE__).'/views/templates'
 ));
 
 $context->smarty->display(dirname(__FILE__).'/views/templates/front/form.tpl');

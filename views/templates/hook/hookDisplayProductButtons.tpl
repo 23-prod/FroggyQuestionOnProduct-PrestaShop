@@ -31,7 +31,7 @@
 	{if $in_fancy}
 		<div style="display: none;">
 			<div id="froggy-qop-fancybox-content">
-				{include file='../include/form.tpl'}
+				{include file="{$module_tpl_dir}/include/form.tpl"}
 			</div>
 		</div>
 	{/if}
