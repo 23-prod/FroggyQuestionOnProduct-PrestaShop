@@ -52,6 +52,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 
 		$this->displayName = $this->l('Froggy Question On Product');
 		$this->description = $this->l('Purpose to your customer to contact you about a product');
+		$this->module_key = '0c2451a33253621fec31aa977dd20cc2';
 	}
 
 	/**
