@@ -80,6 +80,23 @@ if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$module->isCustomerLogged
 				$cm->user_agent = $_SERVER['HTTP_USER_AGENT'];
 				if ($cm->add()) {
 					$context->smarty->assign('success', true);
+
+					$customer_id_lang = $this->context->language->id;
+					$this->context->language->id = Configuration::get('PS_LANG_DEFAULT');
+
+					Mail::Send(
+						Configuration::get('PS_LANG_DEFAULT'),
+						'new-question',
+						$module->l('A new question about a product has been asked to you'),
+						array(
+							'{product_name}' => $product->name[Configuration::get('PS_LANG_DEFAULT')],
+							'{question}' => Tools::htmlentitiesUTF8(Tools::getValue('message'))
+						),
+						Configuration::get('PS_SHOP_EMAIL'),
+						null, null, null, null, null,  _PS_MODULE_DIR_.'/'.$module->name.'/mails/', false, (int)$this->context->shop->id
+					);
+
+					$this->context->language->id = $customer_id_lang;
 				} else {
 					$errors[] = Tools::displayError('An error occurred while sending the message.');
 				}

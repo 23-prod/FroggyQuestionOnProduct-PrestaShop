@@ -1,0 +1,13 @@
+Hello,
+
+A new question has been asked to you about this product: {product_name}.
+
+{question}
+
+You can post your answer into Customer thread interface of your shop.
+
+Regards,
+
+
+
+{shop_url} réalisé par PrestaShop™ - Module Froggy-commerce

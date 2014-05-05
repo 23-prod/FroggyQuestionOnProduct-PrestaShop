@@ -1,0 +1,13 @@
+Bonjour,
+
+Une question vient de vous être posé à propos du produit : {product_name}.
+
+{question}
+
+Vous pouvez répondre à cette question en accèdant à l'espace SAV de votre Back-Office.
+
+Merci,
+
+
+
+{shop_url} réalisé par PrestaShop™ - Module Froggy-commerce

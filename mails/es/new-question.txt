@@ -1,0 +1,13 @@
+Buenos días,
+
+Una cuestión acaba de serle puesta a propósito del producto: {product_name}.
+
+{question}
+
+Usted puede responder a esta cuestión accediendo al espacio SERVICIO POSVENTA de su Back-Office.
+
+Gracias,
+
+
+
+{shop_url} dirigida por PrestaShop
