@@ -1,17 +1,20 @@
 <?php
 
 global $_MODULE;
+
 $_MODULE = array();
 $_MODULE['<{froggyquestiononproduct}prestashop>form_da3e413ae5dde1a6b986203857fb1a59'] = 'ID produit est incorrect';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_dd589a9d9126ea3686b498928e6d5dd3'] = 'Votre adresse e-mail est invalide';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_1feda27e58e6ddaa9080707ac0ab9368'] = 'Votre message est invalide';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_76f54358a2f4a7018fd8fd9588ae8a5a'] = 'Un client a une question à propos d\'un produit...';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_5e8791269640e992cbed9414241441a9'] = 'Une nouvelle question à propos d\'un produit vous a été posée';
+$_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_cd200d73eccdc3c43164985ec4f0e952'] = 'Froggy Question sur un Produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_563e4b727ee4e324b6f9a9c780e1b20b'] = 'Proposez à vos clients de vous contacter à propos d\'un produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_67306c1c6e1472afa4235462627d05eb'] = 'Le contact est incorrect';
 $_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_06af570a0f0b0cd3e724ba47a8b336e4'] = 'Le mode d\'affichage est incorrect';
 $_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_a5ae1ca26c35ee5e20ab237c1097023b'] = 'Le texte pour l\'onglet est invalide';
 $_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_77cae366d6f445e3529aec437b53ef9c'] = 'Le texte pour le lien est invalide';
+$_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_41e5219a3211ae95e50335a3de7cb5d9'] = 'Froggy Question sur un Produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_ea1c6089a51afd440f6a36bf2f3b9316'] = 'Envoyez une question à propos d\'un produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_42eaebcf955190674cc30a358378792d'] = 'Votre question a bien été envoyée !';
 $_MODULE['<{froggyquestiononproduct}prestashop>form.bootstrap_14b53364903a898d059fdebe8f479cdf'] = 'Retourner sur la fiche produit';
@@ -19,6 +22,7 @@ $_MODULE['<{froggyquestiononproduct}prestashop>form_41e5219a3211ae95e50335a3de7c
 $_MODULE['<{froggyquestiononproduct}prestashop>form_ea1c6089a51afd440f6a36bf2f3b9316'] = 'Envoyez une question à propos d\'un produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_42eaebcf955190674cc30a358378792d'] = 'Votre question a bien été envoyée !';
 $_MODULE['<{froggyquestiononproduct}prestashop>form_14b53364903a898d059fdebe8f479cdf'] = 'Retourner sur la fiche produit';
+$_MODULE['<{froggyquestiononproduct}prestashop>getcontent.bootstrap_ea5375ec4ffabf913b1e7924294db791'] = 'Froggy Question sur un Produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent.bootstrap_25a458496bd16eff1bdcb502eb8dc20c'] = 'Proposez à vos clients de vous contacter à propos d\'un produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent.bootstrap_4ce8c57ce8373af69aeda4ff9fec7589'] = 'Configurations sauvegardées avec succès !';
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent.bootstrap_0db377921f4ce762c62526131097968f'] = 'Général';
@@ -39,6 +43,7 @@ $_MODULE['<{froggyquestiononproduct}prestashop>getcontent.bootstrap_63a11faa3a69
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent.bootstrap_de7f58552cd4768cefb7a2d4e3f5bea0'] = 'Ce texte sera utilisé pour le lien qui sera affiché sur la fiche produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent.bootstrap_c9cc8cce247e49bae79f15173ce97354'] = 'Enregistrer';
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent.bootstrap_70397c4b252a5168c5ec003931cea215'] = 'Champs requis';
+$_MODULE['<{froggyquestiononproduct}prestashop>getcontent_cee20c100d9d1f30beb69a80fa8e488a'] = 'Froggy Question sur un Produit';
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent_4ce8c57ce8373af69aeda4ff9fec7589'] = 'Configurations sauvegardées avec succès !';
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent_0db377921f4ce762c62526131097968f'] = 'Général';
 $_MODULE['<{froggyquestiononproduct}prestashop>getcontent_5fc183ddd3592dbe0a39fcf73482a883'] = 'Seulement pour les clients inscrit';
