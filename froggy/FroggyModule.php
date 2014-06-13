@@ -14,8 +14,9 @@
  * for newer PrestaShop versions in the future. If you wish to customize PrestaShop for your
  * needs please refer to http://www.prestashop.com for more information.
  *
- * @author Froggy Commerce <contact@froggy-commerce.com>
- * @copyright  2013-2014 Froggy Commerce
+ * @author    Froggy Commerce <contact@froggy-commerce.com>
+ * @copyright 2013-2014 Froggy Commerce
+ * @license   Unauthorized copying of this file, via any medium is strictly prohibited
  */
 
 class FroggyModule extends Module
@@ -60,7 +61,7 @@ class FroggyModule extends Module
 
 		// Define local path if not exists (1.4 compatibility)
 		if (!isset($this->local_path))
-			$this->local_path = Tools::substr(dirname(__FILE__), 0, strrpos(dirname(__FILE__), '/')).'/';
+			$this->local_path = _PS_MODULE_DIR_.'/'.$this->name.'/';
 
 		// 1.4 retrocompatibility
 		if (!isset($this->context->smarty_methods['FroggyGetAdminLink']))
@@ -466,6 +467,11 @@ class FroggyDefinitionsModuleParser
 	public function parse()
 	{
 		$definitions = Tools::jsonDecode(Tools::file_get_contents($this->filepath), true);
+
+		// On old PS 1.4 version, jsonDecode return an object instead of array
+		if (is_object($definitions))
+			$definitions = (array)$definitions;
+
 		if (is_null($definitions))
 			throw new Exception('Definition parser cannot decode file : '.$this->filepath);
 
