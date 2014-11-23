@@ -48,6 +48,11 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function __construct()
 	{
+		$this->name = 'froggyquestiononproduct';
+		$this->author = 'Froggy Commerce';
+		$this->version = '1.1.2';
+		$this->tab = 'front_office_features';
+
 		parent::__construct();
 
 		$this->displayName = $this->l('Froggy Question On Product');

@@ -57,7 +57,12 @@ class FroggyModule extends Module
 
 		// If PS version is lower than 1.5, call backward script
 		if (version_compare(_PS_VERSION_, '1.5') < 0)
+		{
 			require(dirname(__FILE__).'/FroggyBackward.php');
+			require_once(dirname(__FILE__).'/FroggyOverride.php');
+		}
+		require_once(dirname(__FILE__).'/FroggyHelperFormList.php');
+		require_once(dirname(__FILE__).'/FroggyHelperTreeCategories.php');
 
 		// Define local path if not exists (1.4 compatibility)
 		if (!isset($this->local_path))
@@ -69,6 +74,17 @@ class FroggyModule extends Module
 			smartyRegisterFunction($this->context->smarty, 'function', 'FroggyGetAdminLink', 'FroggyGetAdminLink');
 			$this->context->smarty_methods['FroggyGetAdminLink'] = true;
 		}
+
+		// Security function
+		if (!isset($this->context->smarty_methods['FroggyDisplaySafeHtml']))
+		{
+			smartyRegisterFunction($this->context->smarty, 'function', 'FroggyDisplaySafeHtml', 'FroggyDisplaySafeHtml');
+			$this->context->smarty_methods['FroggyDisplaySafeHtml'] = true;
+		}
+
+		// Define module configuration url
+		if (isset($this->context->employee->id))
+			$this->configuration_url = 'index.php?tab=AdminModules&controller=AdminModules&token='.Tools::getAdminTokenLite('AdminModules').'&configure='.$this->name.'&module_name='.$this->name;
 	}
 
 	/**
@@ -138,6 +154,9 @@ class FroggyModule extends Module
 	{
 		if (parent::install())
 		{
+			if (class_exists('FroggyOverride') && !$this->installFroggyOverrides())
+				return false;
+
 			if (!$this->registerDefinitionsHooks())
 				return false;
 
@@ -149,6 +168,7 @@ class FroggyModule extends Module
 
 			if (!$this->runDefinitionsSql())
 				return false;
+
 			return true;
 		}
 
@@ -164,15 +184,50 @@ class FroggyModule extends Module
 	{
 		if (parent::uninstall())
 		{
+			if (class_exists('FroggyOverride') && !$this->uninstallFroggyOverrides())
+				return false;
+
 			if (!$this->deleteConfigurations())
 				return false;
+
 			if (!$this->deleteModuleControllers())
 				return false;
+
 			if (!$this->runDefinitionsSql('uninstall'))
 				return false;
+
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Install overrides files for the module
+	 *
+	 * @return bool
+	 */
+	public function installFroggyOverrides()
+	{
+		$fo = new FroggyOverride($this->name);
+		try {
+			return $fo->installOverrides();
+		} catch (Exception $e) {
+			$this->_errors[] = sprintf(Tools::displayError('Unable to install override: %s'), $e->getMessage());
+			$fo->uninstallOverrides();
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Uninstall overrides files for the module
+	 *
+	 * @return bool
+	 */
+	public function uninstallFroggyOverrides()
+	{
+		$fo = new FroggyOverride($this->name);
+		return $fo->uninstallOverrides();
 	}
 
 	/**
@@ -408,6 +463,27 @@ class FroggyModule extends Module
 	}
 
 	/**
+	 * Render categories tree method
+	 */
+	public function renderCategoriesTree($id_category_root, $config_name, $field_name)
+	{
+		$categories = array();
+		$categories_selected = Configuration::get($config_name);
+		if (!empty($categories_selected))
+			foreach (Tools::jsonDecode($categories_selected, true) as $key => $category)
+				$categories[] = $category;
+
+		$tree = new FroggyHelperTreeCategories();
+		$tree->setAttributeName($field_name);
+		$tree->setRootCategory($id_category_root);
+		$tree->setLang($this->context->employee->id_lang);
+		$tree->setSelectedCategories($categories);
+		$tree->setContext($this->context);
+		$tree->setModule($this);
+		return $tree->render();
+	}
+
+	/**
 	 * Backwrd method in order to replace Configuration::isLangKey($key)
 	 *
 	 * @param $key
@@ -520,13 +596,17 @@ function FroggyGetAdminLink($params, &$smarty)
 		$params['a'] = $match[$params['a']];
 
 	// In 1.4, we build it with cookie for back office or with argument for front office (see froggytoolbar)
-	global $cookie;
 	$tab = $params['a'];
-	$id_employee = $cookie->id_employee;
+	$id_employee = FroggyContext::getContext()->employee->id;
 	if (isset($params['e']))
 		$id_employee = $params['e'];
 	$token = Tools::getAdminToken($tab.(int)Tab::getIdFromClassName($tab).(int)$id_employee);
 
 	// Return link
 	return 'index.php?tab='.$tab.'&token='.$token;
+}
+
+function FroggyDisplaySafeHtml($params, &$smarty)
+{
+	return $params['s'];
 }
