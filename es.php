@@ -3,11 +3,11 @@
 global $_MODULE;
 
 $_MODULE = array();
-$_MODULE['<{froggyquestiononproduct}prestashop>form_da3e413ae5dde1a6b986203857fb1a59'] = 'ID producto es incorrecto';
-$_MODULE['<{froggyquestiononproduct}prestashop>form_dd589a9d9126ea3686b498928e6d5dd3'] = 'Su correo electrónico es inválido';
-$_MODULE['<{froggyquestiononproduct}prestashop>form_1feda27e58e6ddaa9080707ac0ab9368'] = 'Su mensaje es inválido';
-$_MODULE['<{froggyquestiononproduct}prestashop>form_76f54358a2f4a7018fd8fd9588ae8a5a'] = 'Un cliente tiene una cuestión a propósito de un producto';
-$_MODULE['<{froggyquestiononproduct}prestashop>form_5e8791269640e992cbed9414241441a9'] = 'Una nueva cuestión a propósito de un producto le ha sido puesta';
+$_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_da3e413ae5dde1a6b986203857fb1a59'] = 'ID Producto incorrecto';
+$_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_dd589a9d9126ea3686b498928e6d5dd3'] = 'Su correo electrónico es inválido';
+$_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_1feda27e58e6ddaa9080707ac0ab9368'] = 'El campo mensaje es inválido';
+$_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_76f54358a2f4a7018fd8fd9588ae8a5a'] = 'Un cliente tiene una cuestión a propósito de un producto...';
+$_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_5e8791269640e992cbed9414241441a9'] = 'Una nueva cuestión a propósito de un producto le ha sido puesta.';
 $_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_cd200d73eccdc3c43164985ec4f0e952'] = 'Froggy Cuestión de un Producto';
 $_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_563e4b727ee4e324b6f9a9c780e1b20b'] = 'Propóngales a sus clientes ponerse en contacto a propósito de un producto';
 $_MODULE['<{froggyquestiononproduct}prestashop>froggyquestiononproduct_67306c1c6e1472afa4235462627d05eb'] = 'El contacto es incorrecto';
