@@ -20,11 +20,11 @@
 <p class="froggy-qop-link">
 	{if $in_fancy}
 		<a id="froggy-qop-fancybox" href="#froggy-qop-fancybox-content">
-			<img src="{$module_path}/views/img/help.png" alt="" /> {$link_text}
+			<img src="{$module_path}/img/help.png" alt="" /> {$link_text}
 		</a>
 	{else}
 		<a id="froggy-qop-fancybox" href="{$controller_href}&id_product={$id_product}">
-			<img src="{$module_path}/views/img/help.png" alt="" /> {$link_text}
+			<img src="{$module_path}/img/help.png" alt="" /> {$link_text}
 		</a>
 	{/if}
 </p>
