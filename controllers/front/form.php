@@ -106,7 +106,7 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
 				}
 
 				if (Tools::getIsset('ajax')) {
-					echo json_encode(array(
+					echo Tools::jsonEncode(array(
 						'has_errors' => (bool)count($this->errors),
 						'errors' => $this->errors
 					));

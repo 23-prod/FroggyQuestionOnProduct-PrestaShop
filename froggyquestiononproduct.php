@@ -193,7 +193,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookActionAdminControllerSetMedia($params)
 	{
-		if (strtolower(Tools::getValue('controller')) == 'adminmodules' && Tools::getValue('configure') == $this->name) {
+		if (Tools::strtolower(Tools::getValue('controller')) == 'adminmodules' && Tools::getValue('configure') == $this->name) {
 			$this->context->controller->addJs($this->_path.'js/backend.js');
 		}
 	}

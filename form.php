@@ -106,7 +106,7 @@ if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$module->isCustomerLogged
 		}
 
 		if (Tools::getIsset('ajax')) {
-			echo json_encode(array(
+			echo Tools::jsonEncode(array(
 				'has_errors' => (bool)count($errors),
 				'errors' => $errors
 			));
