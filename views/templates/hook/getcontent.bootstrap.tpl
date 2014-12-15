@@ -108,7 +108,7 @@
 				<div class="col-lg-9 col-lg-offset-3"><input class="btn btn-default" type="submit" name="froggyquestiononproduct_config" value="{l s='Save' mod='froggyquestiononproduct'}" /></div>
 			</div>
 
-			<p><sup class="required">*</sup> {l s='Required fields'}</p>
+			<p><sup class="required">*</sup> {l s='Required fields' mod='froggyquestiononproduct'}</p>
 		</form>
 	</div>
 </fieldset>

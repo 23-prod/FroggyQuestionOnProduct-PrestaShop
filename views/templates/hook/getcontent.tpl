@@ -110,6 +110,6 @@
 			<input class="button" type="submit" name="froggyquestiononproduct_config" value="{l s='Save' mod='froggyquestiononproduct'}" />
 		</div>
 
-		<p><sup class="required">*</sup> {l s='Required fields'}</p>
+		<p><sup class="required">*</sup> {l s='Required fields' mod='froggyquestiononproduct'}</p>
 	</form>
 </fieldset>

@@ -1,22 +1,23 @@
 <?php
-/*
-* 2013-2014 Froggy Commerce
-*
-* NOTICE OF LICENSE
-*
-* You should have received a licence with this module.
-* If you didn't buy this module on Froggy-Commerce.com, ThemeForest.net
-* or Addons.PrestaShop.com, please contact us immediately : contact@froggy-commerce.com
-*
-* DISCLAIMER
-*
-* Do not edit or add to this file if you wish to benefit the updates
-* for newer PrestaShop versions in the future. If you wish to customize PrestaShop for your
-* needs please refer to http://www.prestashop.com for more information.
-*
-*  @author Froggy Commerce <contact@froggy-commerce.com>
-*  @copyright  2013-2014 Froggy Commerce
-*/
+/**
+ * 2013-2014 Froggy Commerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * You should have received a licence with this module.
+ * If you didn't buy this module on Froggy-Commerce.com, ThemeForest.net
+ * or Addons.PrestaShop.com, please contact us immediately : contact@froggy-commerce.com
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to benefit the updates
+ * for newer PrestaShop versions in the future. If you wish to customize PrestaShop for your
+ * needs please refer to http://www.prestashop.com for more information.
+ *
+ * @author    Froggy Commerce <contact@froggy-commerce.com>
+ * @copyright 2013-2014 Froggy Commerce
+ * @license   Unauthorized copying of this file, via any medium is strictly prohibited
+ */
 
 $useSSL = false;
 
@@ -81,8 +82,8 @@ if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$module->isCustomerLogged
 				if ($cm->add()) {
 					$context->smarty->assign('success', true);
 
-					$customer_id_lang = $this->context->language->id;
-					$this->context->language->id = Configuration::get('PS_LANG_DEFAULT');
+					$customer_id_lang = $context->language->id;
+					$context->language->id = Configuration::get('PS_LANG_DEFAULT');
 
 					Mail::Send(
 						Configuration::get('PS_LANG_DEFAULT'),
@@ -93,10 +94,10 @@ if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$module->isCustomerLogged
 							'{question}' => Tools::htmlentitiesUTF8(Tools::getValue('message'))
 						),
 						Configuration::get('PS_SHOP_EMAIL'),
-						null, null, null, null, null,  _PS_MODULE_DIR_.'/'.$module->name.'/mails/', false, (int)$this->context->shop->id
+						null, null, null, null, null,  _PS_MODULE_DIR_.'/'.$module->name.'/mails/', false, (int)$context->shop->id
 					);
 
-					$this->context->language->id = $customer_id_lang;
+					$context->language->id = $customer_id_lang;
 				} else {
 					$errors[] = Tools::displayError('An error occurred while sending the message.');
 				}
