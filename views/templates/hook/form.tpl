@@ -20,11 +20,11 @@
 <form class="froggy-qop-form{if isset($in_page)} in-page{/if}" action="{$controller_href}&id_product={$id_product}" method="post" data-in-fancy="{if isset($in_fancy)}1{else}0{/if}">
 
 	{if !isset($in_page)}
-		<div class="alert alert-success success" style="display: none;">
-			{l s='Your question has been sended !' mod='froggyquestiononproduct'}
+		<div class="success" style="display: none;">
+			<p>{l s='Your question has been sended !' mod='froggyquestiononproduct'}</p>
 		</div>
-		<div class="alert alert-danger error" style="display: none;">
-			{l s='Some errors occured:' mod='froggyquestiononproduct'}
+		<div class="error" style="display: none;">
+			<p>{l s='Some errors occured:' mod='froggyquestiononproduct'}</p>
 			<ol class="error-list"></ol>
 		</div>
 		<input type="hidden" name="ajax" value="1" />
@@ -33,7 +33,7 @@
 
 	<div id="froggy-qop-form-container">
 		{if !isset($in_page)}
-			<p class="lead"><b>{l s='Please enter below your question about :' mod='froggyquestiononproduct'}</b> {$product->name}</p>
+			<p><b>{l s='Please enter below your question about :' mod='froggyquestiononproduct'}</b> {$product->name|escape:'htmlall':'UTF-8'}</p>
 		{/if}
 
 		{if !$isLogged}
@@ -49,8 +49,8 @@
 		<hr class="froggy-qop" />
 
 		<div class="center">
-			<input type="hidden" name="id_product" value="{$id_product}" />
-			<button class="button btn btn-default button-small" type="submit" name="submitQuestion"><span>{l s='Send' mod='froggyquestiononproduct'}</span></button>
+			<input type="hidden" name="id_product" value="{$id_product|escape:'htmlall':'UTF-8'}" />
+			<input class="button" type="submit" name="submitQuestion" value="{l s='Send' mod='froggyquestiononproduct'}" />
 		</div>
 	</div>
 

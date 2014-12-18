@@ -17,9 +17,9 @@
 *  @copyright  2013-2014 Froggy Commerce
 *}
 
-<script type="text/javascript">id_language = Number({$id_lang_default});</script>
+<script type="text/javascript">id_language = Number({$id_lang_default|escape:'htmlall':'UTF-8'});</script>
 <fieldset>
-	<legend><img src="{$froggyquestiononproduct.module_dir}logo.png" alt="" width="16" />{l s='Froggy Question on Product' mod='froggyquestiononproduct'}</legend>
+	<legend><img src="{$froggyquestiononproduct.module_dir|escape:'htmlall':'UTF-8'}logo.png" alt="" width="16" />{l s='Froggy Question on Product' mod='froggyquestiononproduct'}</legend>
 
 	{if $froggyquestiononproduct.post_process.result === true}
 		<div class="conf">
@@ -29,7 +29,7 @@
 		<div class="error">
 			<ul>
 				{foreach from=$froggyquestiononproduct.post_process.errors item=error}
-					<li>{$error}</li>
+					<li>{$error|escape:'htmlall':'UTF-8'}</li>
 				{/foreach}
 			</ul>
 		</div>

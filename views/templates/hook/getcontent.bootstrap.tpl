@@ -17,10 +17,10 @@
 *  @copyright  2013-2014 Froggy Commerce
 *}
 
-<script type="text/javascript">id_language = Number({$id_lang_default});</script>
+<script type="text/javascript">id_language = Number({$id_lang_default|escape:'htmlall':'UTF-8'});</script>
 <h2 align="center">{l s='froggy question on product' mod='froggyquestiononproduct'}</h2>
 <fieldset>
-	<legend><img src="{$froggyquestiononproduct.module_dir}logo.png" alt="" width="16" />{l s='Allow customer to ask a question on a product' mod='froggyquestiononproduct'}</legend>
+	<legend><img src="{$froggyquestiononproduct.module_dir|escape:'htmlall':'UTF-8'}logo.png" alt="" width="16" />{l s='Allow customer to ask a question on a product' mod='froggyquestiononproduct'}</legend>
 
 	{if $froggyquestiononproduct.post_process.result === true}
 		<div class="module_confirmation conf confirm alert alert-success">
@@ -30,7 +30,7 @@
 		<div class="module_confirmation conf confirm alert alert-danger">
 			<ul>
 				{foreach from=$froggyquestiononproduct.post_process.errors item=error}
-					<li>{$error}</li>
+					<li>{$error|escape:'htmlall':'UTF-8'}</li>
 				{/foreach}
 			</ul>
 		</div>

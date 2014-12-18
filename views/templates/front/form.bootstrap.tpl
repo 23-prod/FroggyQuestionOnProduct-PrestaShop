@@ -24,7 +24,7 @@
 
 <div class="froggy-qop-product">
 	<div class="f_left">
-		<a href="{$link->getProductLink($product)}" class="product_img_link" title="{$product->name|escape:'htmlall':'UTF-8'}">
+		<a href="{$link->getProductLink($product)|escape:'htmlall':'UTF-8'}" class="product_img_link" title="{$product->name|escape:'htmlall':'UTF-8'}">
 			<img src="{$link->getImageLink($product->link_rewrite, $product->id_image, $image_format)}" alt="{$product->name|escape:'htmlall':'UTF-8'}" />
 		</a>
 	</div>
@@ -38,8 +38,8 @@
 {if isset($success) && $success}
 	<div class="success">
 		<p>{l s='Your question has been sended !' mod='froggyquestiononproduct'}</p>
-		<p><a href="{$link->getProductLink($product)}">{l s='Return to product' mod='froggyquestiononproduct'}</a></p>
+		<p><a href="{$link->getProductLink($product)|escape:'htmlall':'UTF-8'}">{l s='Return to product' mod='froggyquestiononproduct'}</a></p>
 	</div>
 {else}
-	{include file="{$module_tpl_dir}/include/form.bootstrap.tpl" in_page=true}
+	{include file="{$module_tpl_dir}/hook/form.bootstrap.tpl" in_page=true}
 {/if}

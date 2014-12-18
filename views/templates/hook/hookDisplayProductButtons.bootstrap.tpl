@@ -20,11 +20,11 @@
 <p class="froggy-qop-link">
 	{if $in_fancy}
 		<a id="froggy-qop-fancybox" href="#froggy-qop-fancybox-content">
-			<img src="{$module_path}/img/help.png" alt="" /> {$link_text}
+			<img src="{$module_path|escape:'htmlall':'UTF-8'}/img/help.png" alt="" /> {$link_text|escape:'htmlall':'UTF-8'}
 		</a>
 	{else}
-		<a id="froggy-qop-fancybox" href="{$controller_href}&id_product={$id_product}">
-			<img src="{$module_path}/img/help.png" alt="" /> {$link_text}
+		<a id="froggy-qop-fancybox" href="{$controller_href|escape:'htmlall':'UTF-8'}&id_product={$id_product|escape:'htmlall':'UTF-8'}">
+			<img src="{$module_path|escape:'htmlall':'UTF-8'}/img/help.png" alt="" /> {$link_text|escape:'htmlall':'UTF-8'}
 		</a>
 	{/if}
 </p>
@@ -32,7 +32,7 @@
 {if $in_fancy}
 	<div style="display: none;">
 		<div id="froggy-qop-fancybox-content">
-			{include file="{$module_tpl_dir}/include/form.bootstrap.tpl"}
+			{include file="{$module_tpl_dir|escape:'htmlall':'UTF-8'}/hook/form.bootstrap.tpl"}
 		</div>
 	</div>
 {/if}

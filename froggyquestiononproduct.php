@@ -1,27 +1,32 @@
 <?php
-/*
-* 2013-2014 Froggy Commerce
-*
-* NOTICE OF LICENSE
-*
-* You should have received a licence with this module.
-* If you didn't buy this module on Froggy-Commerce.com, ThemeForest.net
-* or Addons.PrestaShop.com, please contact us immediately : contact@froggy-commerce.com
-*
-* DISCLAIMER
-*
-* Do not edit or add to this file if you wish to benefit the updates
-* for newer PrestaShop versions in the future. If you wish to customize PrestaShop for your
-* needs please refer to http://www.prestashop.com for more information.
-*
-*  @author Froggy Commerce <contact@froggy-commerce.com>
-*  @copyright  2013-2014 Froggy Commerce
-*/
+/**
+ * 2013-2014 Froggy Commerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * You should have received a licence with this module.
+ * If you didn't buy this module on Froggy-Commerce.com, ThemeForest.net
+ * or Addons.PrestaShop.com, please contact us immediately : contact@froggy-commerce.com
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to benefit the updates
+ * for newer PrestaShop versions in the future. If you wish to customize PrestaShop for your
+ * needs please refer to http://www.prestashop.com for more information.
+ *
+ * @author    Froggy Commerce <contact@froggy-commerce.com>
+ * @copyright 2013-2014 Froggy Commerce
+ * @license   Unauthorized copying of this file, via any medium is strictly prohibited
+ */
 
-// Security
+/*
+ * Security
+ */
 defined('_PS_VERSION_') || require dirname(__FILE__).'/index.php';
 
-// Include Froggy Library
+/*
+ * Include Froggy Library
+ */
 if (!class_exists('FroggyModule', false)) require_once dirname(__FILE__).'/froggy/FroggyModule.php';
 
 /**
@@ -112,15 +117,14 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookDisplayProductTab($params)
 	{
-		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
+		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged())
 			return;
-		}
 
-		if (version_compare(_PS_VERSION_, '1.6.0') >= 0) {
+		if (version_compare(_PS_VERSION_, '1.6.0') >= 0)
 			return;
-		}
 
-		if ($this->isInTab()) {
+		if ($this->isInTab())
+		{
 			$this->context->smarty->assign(array(
 				'tab_text' => Configuration::get('FC_QOP_TAB_TEXT', $this->context->language->id)
 			));
@@ -137,11 +141,11 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookDisplayProductTabContent($params)
 	{
-		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
+		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged())
 			return;
-		}
 
-		if ($this->isInTab()) {
+		if ($this->isInTab())
+		{
 			$this->context->smarty->assign(array(
 				'isLogged' => $this->isCustomerLogged(),
 				'id_product' => Tools::getValue('id_product'),
@@ -164,9 +168,9 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookDisplayLeftColumnProduct($params)
 	{
-		if (version_compare(_PS_VERSION_, '1.6.0') >= 0) {
+		if (version_compare(_PS_VERSION_, '1.6.0') >= 0)
 			return;
-		}
+
 		return $this->processProductButtons();
 	}
 
@@ -179,9 +183,9 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookDisplayProductButtons($params)
 	{
-		if (version_compare(_PS_VERSION_, '1.6.0') < 0) {
+		if (version_compare(_PS_VERSION_, '1.6.0') < 0)
 			return;
-		}
+
 		return $this->processProductButtons();
 	}
 
@@ -193,9 +197,8 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookActionAdminControllerSetMedia($params)
 	{
-		if (Tools::strtolower(Tools::getValue('controller')) == 'adminmodules' && Tools::getValue('configure') == $this->name) {
+		if (Tools::strtolower(Tools::getValue('controller')) == 'adminmodules' && Tools::getValue('configure') == $this->name)
 			$this->context->controller->addJs($this->_path.'js/backend.js');
-		}
 	}
 
 	/**
@@ -205,50 +208,47 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	protected function postProcess()
 	{
-		if (Tools::getIsset('froggyquestiononproduct_config')) {
-			if (!Validate::isInt(Tools::getValue('FC_QOP_CONTACT_ID'))) {
+		if (Tools::getIsset('froggyquestiononproduct_config'))
+		{
+			if (!Validate::isInt(Tools::getValue('FC_QOP_CONTACT_ID')))
 				$this->errors[] = $this->l('Contact field is incorrect');
-			}
+
 			if (Tools::getValue('FC_QOP_SHOW_MODE') != self::SHOW_MODE_FANCY &&
 				Tools::getValue('FC_QOP_SHOW_MODE') != self::SHOW_MODE_TAB &&
-				Tools::getValue('FC_QOP_SHOW_MODE') != self::SHOW_MODE_PAGE) {
+				Tools::getValue('FC_QOP_SHOW_MODE') != self::SHOW_MODE_PAGE)
 				$this->errors[] = $this->l('Show mode is incorrect');
-			}
 
 			$multilang_fields = array(
 				'tab_text' => $this->l('Tab text is invalid'),
 				'link_text' => $this->l('Link text is invalid')
 			);
 			$languages = Language::getLanguages(false);
-			foreach ($multilang_fields as $field => $message) {
+			foreach ($multilang_fields as $field => $message)
+			{
 				$values = Tools::getValue($field);
-				if (is_array($values)) {
-					foreach ($languages as $language) {
-						if (!isset($values[$language['id_lang']]) || !ValidateCore::isCleanHtml($values[$language['id_lang']]) || $values[$language['id_lang']] == '') {
+				if (is_array($values))
+					foreach ($languages as $language)
+						if (!isset($values[$language['id_lang']]) || !ValidateCore::isCleanHtml($values[$language['id_lang']]) || $values[$language['id_lang']] == '')
 							$this->errors[] = $message;
-						}
-					}
-				} else {
+				else
 					$this->errors[] = $message;
-				}
 			}
 
-			if (!count($this->errors)) {
+			if (!count($this->errors))
+			{
 				$multilang_fields = array(
 					'FC_QOP_TAB_TEXT' => 'tab_text',
 					'FC_QOP_LINK_TEXT' => 'link_text'
 				);
-				foreach($this->getModuleConfigurationsKeys() as $configuration) {
-					if (isset($multilang_fields[$configuration])) {
+				foreach ($this->getModuleConfigurationsKeys() as $configuration)
+					if (isset($multilang_fields[$configuration]))
 						Configuration::updateValue($configuration, Tools::getValue($multilang_fields[$configuration]));
-					} else {
+					else
 						Configuration::updateValue($configuration, Tools::getValue($configuration));
-					}
-				}
 				return true;
-			} else {
-				return false;
 			}
+			else
+				return false;
 		}
 		return null;
 	}
@@ -258,11 +258,11 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	protected function processProductButtons()
 	{
-		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
+		if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged())
 			return;
-		}
 
-		if (!$this->isInTab()) {
+		if (!$this->isInTab())
+		{
 			$this->context->smarty->assign(array(
 				'link_text' => Configuration::get('FC_QOP_LINK_TEXT', $this->context->language->id),
 				'controller_href' => $this->getModuleLink('form').(version_compare(_PS_VERSION_, '1.5') >= 0 && Configuration::get('PS_REWRITING_SETTINGS') ? '?' : ''),
@@ -315,9 +315,28 @@ class FroggyQuestionOnProduct extends FroggyModule
 	/**
 	 * Backward 1.4
 	 */
-	public function hookBackOfficeHeader($params) { return '<script type="text/javascript" src="'.$this->_path.'js/backend.js"></script>'; }
-	public function hookHeader($params) { return $this->hookDisplayHeader($params); }
-	public function hookExtraLeft($params) { return $this->hookDisplayLeftColumnProduct($params); }
-	public function hookProductTab($params) { return $this->hookDisplayProductTab($params); }
-	public function hookProductTabContent($params) { return $this->hookDisplayProductTabContent($params); }
+	public function hookBackOfficeHeader($params)
+	{
+		return '<script type="text/javascript" src="'.$this->_path.'js/backend.js"></script>';
+	}
+
+	public function hookHeader($params)
+	{
+		return $this->hookDisplayHeader($params);
+	}
+
+	public function hookExtraLeft($params)
+	{
+		return $this->hookDisplayLeftColumnProduct($params);
+	}
+
+	public function hookProductTab($params)
+	{
+		return $this->hookDisplayProductTab($params);
+	}
+
+	public function hookProductTabContent($params)
+	{
+		return $this->hookDisplayProductTabContent($params);
+	}
 }

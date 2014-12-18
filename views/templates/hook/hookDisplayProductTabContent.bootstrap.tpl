@@ -17,8 +17,8 @@
 *  @copyright  2013-2014 Froggy Commerce
 *}
 
-<h3 class="page-product-heading">{$tab_text}</h3>
+<h3 class="page-product-heading">{$tab_text|escape:'htmlall':'UTF-8'}</h3>
 
 <div id="idTabfroggyquestiononproduct">
-	{include file="{$module_tpl_dir}/include/form.bootstrap.tpl"}
+	{include file="{$module_tpl_dir|escape:'htmlall':'UTF-8'}/hook/form.bootstrap.tpl"}
 </div>
