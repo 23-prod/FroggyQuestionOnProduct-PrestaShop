@@ -86,7 +86,7 @@
 							<input type="text" name="tab_text[{$language['id_lang']}]" id="tab_text_{$language['id_lang']}" value="{if isset($smarty.post.tab_text.{$language['id_lang']})}{$smarty.post.tab_text.{$language['id_lang']}|escape:'htmlall':'UTF-8'}{else}{$froggyquestiononproduct.FC_QOP_TAB_TEXT.{$language['id_lang']}}{/if}" />
 						</div>
 					{/foreach}
-					{$module->displayFlags($languages, $id_lang_default, $divLangName, 'tab_text', true)}
+					{FroggyDisplaySafeHtml s=$module->displayFlags($languages, $id_lang_default, $divLangName, 'tab_text', true)}
 					<p class="help-block">{l s='This text will be used on tab on product page' mod='froggyquestiononproduct'}</p>
 				</div>
 			</div>
@@ -99,7 +99,7 @@
 							<input type="text" name="link_text[{$language['id_lang']}]" id="link_text_{$language['id_lang']}" value="{if isset($smarty.post.link_text.{$language['id_lang']})}{$smarty.post.link_text.{$language['id_lang']}|escape:'htmlall':'UTF-8'}{else}{$froggyquestiononproduct.FC_QOP_LINK_TEXT.{$language['id_lang']}}{/if}" />
 						</div>
 					{/foreach}
-					{$module->displayFlags($languages, $id_lang_default, $divLangName, 'link_text', true)}
+					{FroggyDisplaySafeHtml s=$module->displayFlags($languages, $id_lang_default, $divLangName, 'link_text', true)}
 					<p class="help-block">{l s='This text will be used on link on product page' mod='froggyquestiononproduct'}</p>
 				</div>
 			</div>
