@@ -222,14 +222,15 @@ class FroggyQuestionOnProduct extends FroggyModule
 				'tab_text' => $this->l('Tab text is invalid'),
 				'link_text' => $this->l('Link text is invalid')
 			);
-			$languages = Language::getLanguages(false);
+			$languages = Language::getLanguages(true);
 			foreach ($multilang_fields as $field => $message)
 			{
 				$values = Tools::getValue($field);
 				if (is_array($values))
-					foreach ($languages as $language)
-						if (!isset($values[$language['id_lang']]) || !ValidateCore::isCleanHtml($values[$language['id_lang']]) || $values[$language['id_lang']] == '')
+					foreach ($languages as $language) {
+						if (!isset($values[$language['id_lang']]) || !Validate::isCleanHtml($values[$language['id_lang']]) || $values[$language['id_lang']] == '')
 							$this->errors[] = $message;
+					}
 				else
 					$this->errors[] = $message;
 			}
