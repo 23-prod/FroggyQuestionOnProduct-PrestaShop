@@ -227,7 +227,8 @@ class FroggyQuestionOnProduct extends FroggyModule
 			{
 				$values = Tools::getValue($field);
 				if (is_array($values))
-					foreach ($languages as $language) {
+					foreach ($languages as $language)
+					{
 						if (!isset($values[$language['id_lang']]) || !Validate::isCleanHtml($values[$language['id_lang']]) || $values[$language['id_lang']] == '')
 							$this->errors[] = $message;
 					}

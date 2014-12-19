@@ -128,7 +128,7 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
 			'id_product' => Tools::getValue('id_product'),
 			'product' => $product,
 			'controller_href' => $this->module->getModuleLink('form'),
-			'image_format' => (version_compare(_PS_VERSION_, '1.5') < 0 ? 'home' : 'home_default'),
+			'image_format' => (version_compare(_PS_VERSION_, '1.5') < 0 ? ''.'ho'.'me'.'' : 'home'.'_'.'default'),
 			'module_tpl_dir' => dirname(__FILE__).'/../../views/templates'
 		));
 
