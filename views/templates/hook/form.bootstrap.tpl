@@ -1,5 +1,5 @@
 {*
-* 2013-2014 Froggy Commerce
+* 2013-2015 Froggy Commerce
 *
 * NOTICE OF LICENSE
 *
@@ -14,7 +14,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author Froggy Commerce <contact@froggy-commerce.com>
-*  @copyright  2013-2014 Froggy Commerce
+*  @copyright  2013-2015 Froggy Commerce
 *}
 
 <form class="froggy-qop-form{if isset($in_page)} in-page{/if}" action="{$controller_href}&id_product={$id_product}" method="post" data-in-fancy="{if isset($in_fancy)}1{else}0{/if}">
