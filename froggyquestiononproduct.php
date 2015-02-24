@@ -32,7 +32,7 @@ if (!class_exists('FroggyModule', false)) require_once dirname(__FILE__).'/frogg
 /**
  * Module Froggy Question On Product
  *
- * Version: 1.0.0
+ * Version: 1.2.1
  */
 class FroggyQuestionOnProduct extends FroggyModule
 {
@@ -55,7 +55,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 	{
 		$this->name = 'froggyquestiononproduct';
 		$this->author = 'Froggy Commerce';
-		$this->version = '1.2.0';
+		$this->version = '1.2.1';
 		$this->tab = 'front_office_features';
 
 		parent::__construct();
@@ -155,6 +155,11 @@ class FroggyQuestionOnProduct extends FroggyModule
 				'module_tpl_dir' => dirname(__FILE__).'/views/templates'
 			));
 
+			return $this->fcdisplay(__FILE__, 'hookDisplayProductTabContent.tpl');
+		}
+		elseif (version_compare(_PS_VERSION_, '1.6.0') >= 0 && $this->isInFancybox())
+		{
+			$this->processProductButtons();
 			return $this->fcdisplay(__FILE__, 'hookDisplayProductTabContent.tpl');
 		}
 	}

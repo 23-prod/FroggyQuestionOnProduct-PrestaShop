@@ -28,11 +28,3 @@
 		</a>
 	{/if}
 </p>
-
-{if $in_fancy}
-	<div style="display: none;">
-		<div id="froggy-qop-fancybox-content">
-			{include file="{$module_tpl_dir|escape:'htmlall':'UTF-8'}/hook/form.bootstrap.tpl"}
-		</div>
-	</div>
-{/if}

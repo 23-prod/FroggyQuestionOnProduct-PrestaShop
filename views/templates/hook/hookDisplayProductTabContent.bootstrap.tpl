@@ -17,8 +17,16 @@
 *  @copyright  2013-2015 Froggy Commerce
 *}
 
-<h3 class="page-product-heading">{$tab_text|escape:'htmlall':'UTF-8'}</h3>
+{if $in_fancy}
+	<div style="display: none;">
+		<div id="froggy-qop-fancybox-content">
+			{include file="{$module_tpl_dir|escape:'htmlall':'UTF-8'}/hook/form.bootstrap.tpl"}
+		</div>
+	</div>
+{else}
+	<h3 class="page-product-heading">{$tab_text|escape:'htmlall':'UTF-8'}</h3>
 
-<div id="idTabfroggyquestiononproduct">
-	{include file="{$module_tpl_dir|escape:'htmlall':'UTF-8'}/hook/form.bootstrap.tpl"}
-</div>
+	<div id="idTabfroggyquestiononproduct">
+		{include file="{$module_tpl_dir|escape:'htmlall':'UTF-8'}/hook/form.bootstrap.tpl"}
+	</div>
+{/if}
