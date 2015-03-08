@@ -17,9 +17,9 @@
 *  @copyright  2013-2015 Froggy Commerce
 *}
 
-<form class="froggy-qop-form{if isset($in_page)} in-page{/if}" action="{$controller_href}&id_product={$id_product}" method="post" data-in-fancy="{if isset($in_fancy)}1{else}0{/if}">
+<form class="froggy-qop-form{if isset($froggyquestiononproduct.in_page)} in-page{/if}" action="{$froggyquestiononproduct.controller_href}&id_product={$froggyquestiononproduct.id_product}" method="post" data-in-fancy="{if isset($froggyquestiononproduct.in_fancy)}1{else}0{/if}">
 
-	{if !isset($in_page)}
+	{if !isset($froggyquestiononproduct.in_page)}
 		<div class="success" style="display: none;">
 			<p>{l s='Your question has been sended !' mod='froggyquestiononproduct'}</p>
 		</div>
@@ -32,11 +32,11 @@
 	{/if}
 
 	<div id="froggy-qop-form-container">
-		{if !isset($in_page)}
-			<p><b>{l s='Please enter below your question about :' mod='froggyquestiononproduct'}</b> {$product->name|escape:'htmlall':'UTF-8'}</p>
+		{if !isset($froggyquestiononproduct.in_page)}
+			<p><b>{l s='Please enter below your question about :' mod='froggyquestiononproduct'}</b> {$froggyquestiononproduct.product->name|escape:'htmlall':'UTF-8'}</p>
 		{/if}
 
-		{if !$isLogged}
+		{if !$froggyquestiononproduct.isLogged}
 			<label for="email">{l s='Your e-mail address' mod='froggyquestiononproduct'}</label>
 			<input type="text" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email|escape:'htmlall':'UTF-8'}{/if}" size="40" placeholder="{l s='your@email' mod='froggyquestiononproduct'}" />
 			<div class="clearBoth"></div>
@@ -49,7 +49,7 @@
 		<hr class="froggy-qop" />
 
 		<div class="center">
-			<input type="hidden" name="id_product" value="{$id_product|escape:'htmlall':'UTF-8'}" />
+			<input type="hidden" name="id_product" value="{$froggyquestiononproduct.id_product|escape:'htmlall':'UTF-8'}" />
 			<input class="button" type="submit" name="submitQuestion" value="{l s='Send' mod='froggyquestiononproduct'}" />
 		</div>
 	</div>

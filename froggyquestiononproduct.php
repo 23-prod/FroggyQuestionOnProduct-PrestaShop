@@ -32,7 +32,7 @@ if (!class_exists('FroggyModule', false)) require_once dirname(__FILE__).'/frogg
 /**
  * Module Froggy Question On Product
  *
- * Version: 1.2.1
+ * Version: 1.3.0
  */
 class FroggyQuestionOnProduct extends FroggyModule
 {
@@ -55,7 +55,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 	{
 		$this->name = 'froggyquestiononproduct';
 		$this->author = 'Froggy Commerce';
-		$this->version = '1.2.1';
+		$this->version = '1.3.0';
 		$this->tab = 'front_office_features';
 
 		parent::__construct();
@@ -125,7 +125,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 
 		if ($this->isInTab())
 		{
-			$this->context->smarty->assign(array(
+			$this->smarty->assign($this->name, array(
 				'tab_text' => Configuration::get('FC_QOP_TAB_TEXT', $this->context->language->id)
 			));
 			return $this->fcdisplay(__FILE__, 'hookDisplayProductTab.tpl');
@@ -146,7 +146,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 
 		if ($this->isInTab())
 		{
-			$this->context->smarty->assign(array(
+			$this->smarty->assign($this->name, array(
 				'isLogged' => $this->isCustomerLogged(),
 				'id_product' => Tools::getValue('id_product'),
 				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id),
@@ -270,7 +270,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 
 		if (!$this->isInTab())
 		{
-			$this->context->smarty->assign(array(
+			$this->smarty->assign($this->name, array(
 				'link_text' => Configuration::get('FC_QOP_LINK_TEXT', $this->context->language->id),
 				'controller_href' => $this->getModuleLink('form').(version_compare(_PS_VERSION_, '1.5') >= 0 && Configuration::get('PS_REWRITING_SETTINGS') ? '?' : ''),
 				'module_path' => $this->_path,

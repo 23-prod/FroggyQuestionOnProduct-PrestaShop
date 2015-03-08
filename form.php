@@ -29,7 +29,7 @@ if (!Tools::getIsset('ajax')) require_once(dirname(__FILE__).'/../../header.php'
 
 $context = FroggyContext::getContext();
 $module = new FroggyQuestionOnProduct();
-$errors = array();
+$errors = $assign = array();
 
 if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$module->isCustomerLogged())
 	$errors[] = Tools::displayError('Please login, in order to send a question about a product');
@@ -87,7 +87,7 @@ else
 				$cm->user_agent = $_SERVER['HTTP_USER_AGENT'];
 				if ($cm->add())
 				{
-					$context->smarty->assign('success', true);
+					$assign = array('success' => true);
 
 					$customer_id_lang = $context->language->id;
 					$context->language->id = Configuration::get('PS_LANG_DEFAULT');
@@ -117,16 +117,18 @@ else
 $product = new Product(Tools::getValue('id_product'), false, $context->language->id);
 $image = Product::getCover($product->id);
 $product->id_image = $image['id_image'];
-$context->smarty->assign(array(
-	'in_page' => true,
-	'isLogged' => $module->isCustomerLogged(),
-	'id_product' => Tools::getValue('id_product'),
-	'product' => $product,
-	'controller_href' => $module->getModuleLink('form'),
-	'errors' => $errors,
-	'image_format' => (version_compare(_PS_VERSION_, '1.5') < 0 ? ''.'ho'.'me'.'' : 'home'.'_'.'default'),
-	'module_tpl_dir' => dirname(__FILE__).'/views/templates'
+$assign = array_merge($assign, array(
+    'in_page' => true,
+    'isLogged' => $module->isCustomerLogged(),
+    'id_product' => Tools::getValue('id_product'),
+    'product' => $product,
+    'controller_href' => $module->getModuleLink('form'),
+    'errors' => $errors,
+    'image_format' => (version_compare(_PS_VERSION_, '1.5') < 0 ? ''.'ho'.'me'.'' : 'home'.'_'.'default'),
+    'module_tpl_dir' => dirname(__FILE__).'/views/templates'
 ));
+
+$module->smarty->assign($module->name, $assign);
 
 $context->smarty->display(dirname(__FILE__).'/views/templates/front/form.tpl');
 

@@ -24,22 +24,22 @@
 
 <div class="froggy-qop-product">
 	<div class="f_left">
-		<a href="{$link->getProductLink($product)|escape:'htmlall':'UTF-8'}" class="product_img_link" title="{$product->name|escape:'htmlall':'UTF-8'}">
-			<img src="{$link->getImageLink($product->link_rewrite, $product->id_image, $image_format)}" alt="{$product->name|escape:'htmlall':'UTF-8'}" />
+		<a href="{$link->getProductLink($froggyquestiononproduct.product)|escape:'htmlall':'UTF-8'}" class="product_img_link" title="{$froggyquestiononproduct.product->name|escape:'htmlall':'UTF-8'}">
+			<img src="{$link->getImageLink($froggyquestiononproduct.product->link_rewrite, $froggyquestiononproduct.product->id_image, $froggyquestiononproduct.image_format)}" alt="{$froggyquestiononproduct.product->name|escape:'htmlall':'UTF-8'}" />
 		</a>
 	</div>
-	<h3><a href="{$link->getProductLink($product)}" title="{$product->name|escape:'htmlall':'UTF-8'}">{$product->name|escape:'htmlall':'UTF-8'|truncate:35:'...'}</a></h3>
-	<p class="product_desc">{$product->description_short|strip_tags:'UTF-8'|truncate:360:'...'}</p>
+	<h3><a href="{$link->getProductLink($froggyquestiononproduct.product)}" title="{$froggyquestiononproduct.product->name|escape:'htmlall':'UTF-8'}">{$froggyquestiononproduct.product->name|escape:'htmlall':'UTF-8'|truncate:35:'...'}</a></h3>
+	<p class="product_desc">{$froggyquestiononproduct.product->description_short|strip_tags:'UTF-8'|truncate:360:'...'}</p>
 	<div class="clearBoth"></div>
 </div>
 
 {include file="{$smarty.const._PS_THEME_DIR_}/errors.tpl"}
 
-{if isset($success) && $success}
+{if isset($froggyquestiononproduct.success) && $froggyquestiononproduct.success}
 	<div class="success">
 		<p>{l s='Your question has been sended !' mod='froggyquestiononproduct'}</p>
-		<p><a href="{$link->getProductLink($product)|escape:'htmlall':'UTF-8'}">{l s='Return to product' mod='froggyquestiononproduct'}</a></p>
+		<p><a href="{$link->getProductLink($froggyquestiononproduct.product)|escape:'htmlall':'UTF-8'}">{l s='Return to product' mod='froggyquestiononproduct'}</a></p>
 	</div>
 {else}
-	{include file="{$module_tpl_dir}/hook/form.tpl" in_page=true}
+	{include file="{$froggyquestiononproduct.module_tpl_dir}/hook/form.tpl" in_page=true}
 {/if}

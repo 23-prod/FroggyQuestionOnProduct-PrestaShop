@@ -22,6 +22,8 @@
 class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontController
 {
 
+    protected $assign = array();
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -82,7 +84,7 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
 						$cm->user_agent = $_SERVER['HTTP_USER_AGENT'];
 						if ($cm->add())
 						{
-							$this->context->smarty->assign('success', true);
+                            $this->assign = array('success' => true);
 
 							$customer_id_lang = $this->context->language->id;
 							$this->context->language->id = Configuration::get('PS_LANG_DEFAULT');
@@ -122,15 +124,16 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
 		$product = new Product(Tools::getValue('id_product'), false, $this->context->language->id);
 		$image = Product::getCover($product->id);
 		$product->id_image = $image['id_image'];
-		$this->context->smarty->assign(array(
-			'in_page' => true,
-			'isLogged' => $this->module->isCustomerLogged(),
-			'id_product' => Tools::getValue('id_product'),
-			'product' => $product,
-			'controller_href' => $this->module->getModuleLink('form'),
-			'image_format' => (version_compare(_PS_VERSION_, '1.5') < 0 ? ''.'ho'.'me'.'' : 'home'.'_'.'default'),
-			'module_tpl_dir' => dirname(__FILE__).'/../../views/templates'
-		));
+        $this->assign = array_merge($this->assign, array(
+            'in_page' => true,
+            'isLogged' => $this->module->isCustomerLogged(),
+            'id_product' => Tools::getValue('id_product'),
+            'product' => $product,
+            'controller_href' => $this->module->getModuleLink('form'),
+            'image_format' => (version_compare(_PS_VERSION_, '1.5') < 0 ? ''.'ho'.'me'.'' : 'home'.'_'.'default'),
+            'module_tpl_dir' => dirname(__FILE__).'/../../views/templates'
+        ));
+		$this->module->smarty->assign($this->module->name, $this->assign);
 
 		if (version_compare(_PS_VERSION_, '1.6.0') >= 0)
 			return $this->setTemplate('form.bootstrap.tpl');

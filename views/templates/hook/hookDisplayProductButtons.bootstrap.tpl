@@ -18,13 +18,13 @@
 *}
 
 <p class="froggy-qop-link">
-	{if $in_fancy}
+	{if $froggyquestiononproduct.in_fancy}
 		<a id="froggy-qop-fancybox" href="#froggy-qop-fancybox-content">
-			<img src="{$module_path|escape:'htmlall':'UTF-8'}/img/help.png" alt="" /> {$link_text|escape:'htmlall':'UTF-8'}
+			<img src="{$froggyquestiononproduct.module_path|escape:'htmlall':'UTF-8'}/img/help.png" alt="" /> {$froggyquestiononproduct.link_text|escape:'htmlall':'UTF-8'}
 		</a>
 	{else}
-		<a id="froggy-qop-fancybox" href="{$controller_href|escape:'htmlall':'UTF-8'}&id_product={$id_product|escape:'htmlall':'UTF-8'}">
-			<img src="{$module_path|escape:'htmlall':'UTF-8'}/img/help.png" alt="" /> {$link_text|escape:'htmlall':'UTF-8'}
+		<a id="froggy-qop-fancybox" href="{$froggyquestiononproduct.controller_href|escape:'htmlall':'UTF-8'}&id_product={$froggyquestiononproduct.id_product|escape:'htmlall':'UTF-8'}">
+			<img src="{$froggyquestiononproduct.module_path|escape:'htmlall':'UTF-8'}/img/help.png" alt="" /> {$froggyquestiononproduct.link_text|escape:'htmlall':'UTF-8'}
 		</a>
 	{/if}
 </p>
