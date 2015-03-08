@@ -152,7 +152,8 @@ class FroggyQuestionOnProduct extends FroggyModule
 				'product' => new Product(Tools::getValue('id_product'), false, $this->context->language->id),
 				'tab_text' => Configuration::get('FC_QOP_TAB_TEXT', $this->context->language->id),
 				'controller_href' => $this->getModuleLink('form').(version_compare(_PS_VERSION_, '1.5') >= 0 && Configuration::get('PS_REWRITING_SETTINGS') ? '?' : ''),
-				'module_tpl_dir' => dirname(__FILE__).'/views/templates'
+				'module_tpl_dir' => dirname(__FILE__).'/views/templates',
+				'in_fancy' => $this->isInFancybox(),
 			));
 
 			return $this->fcdisplay(__FILE__, 'hookDisplayProductTabContent.tpl');

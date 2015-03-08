@@ -17,7 +17,7 @@
 *  @copyright  2013-2015 Froggy Commerce
 *}
 
-{if $in_fancy}
+{if $froggyquestiononproduct.in_fancy}
 	<div style="display: none;">
 		<div id="froggy-qop-fancybox-content">
 			{include file="{$froggyquestiononproduct.module_tpl_dir|escape:'htmlall':'UTF-8'}/hook/form.bootstrap.tpl"}
