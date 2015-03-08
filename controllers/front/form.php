@@ -129,11 +129,11 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
             'isLogged' => $this->module->isCustomerLogged(),
             'id_product' => Tools::getValue('id_product'),
             'product' => $product,
-            'controller_href' => $this->module->getModuleLink('form'),
+            'controller_href' => $this->module->getModuleLink('form').(version_compare(_PS_VERSION_, '1.5') >= 0 && Configuration::get('PS_REWRITING_SETTINGS') ? '?' : ''),
             'image_format' => (version_compare(_PS_VERSION_, '1.5') < 0 ? ''.'ho'.'me'.'' : 'home'.'_'.'default'),
             'module_tpl_dir' => dirname(__FILE__).'/../../views/templates'
         ));
-		$this->module->smarty->assign($this->module->name, $this->assign);
+		$this->context->smarty->assign($this->module->name, $this->assign);
 
 		if (version_compare(_PS_VERSION_, '1.6.0') >= 0)
 			return $this->setTemplate('form.bootstrap.tpl');

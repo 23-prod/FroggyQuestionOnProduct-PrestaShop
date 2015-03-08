@@ -128,7 +128,7 @@ $assign = array_merge($assign, array(
     'module_tpl_dir' => dirname(__FILE__).'/views/templates'
 ));
 
-$module->smarty->assign($module->name, $assign);
+$context->smarty->assign($module->name, $assign);
 
 $context->smarty->display(dirname(__FILE__).'/views/templates/front/form.tpl');
 
