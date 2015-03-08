@@ -92,7 +92,13 @@ else
 					$customer_id_lang = $context->language->id;
 					$context->language->id = Configuration::get('PS_LANG_DEFAULT');
 
-					Mail::Send(Configuration::get('PS_LANG_DEFAULT'), 'new-question', $module->l('A new question about a product has been asked to you'), array('{product_name}' => $product->name[Configuration::get('PS_LANG_DEFAULT')], '{question}' => Tools::htmlentitiesUTF8(Tools::getValue('message'))), Configuration::get('PS_SHOP_EMAIL'), null, null, null, null, null, _PS_MODULE_DIR_.'/'.$module->name.'/mails/', false, (int)$context->shop->id);
+					Mail::Send(Configuration::get('PS_LANG_DEFAULT'), 'new-question', $module->l('A new question about a product has been asked to you'), array(
+						'{product_id}' => $product->id,
+						'{product_name}' => $product->name[Configuration::get('PS_LANG_DEFAULT')],
+						'{product_link}' => $this->context->link->getProductLink($product, null, null, null, null, Configuration::get('PS_LANG_DEFAULT')),
+						'{from_email}' => $ct->email,
+						'{question}' => Tools::htmlentitiesUTF8(Tools::getValue('message'))
+					), Configuration::get('PS_SHOP_EMAIL'), null, null, null, null, null, _PS_MODULE_DIR_.'/'.$module->name.'/mails/', false, (int)$context->shop->id);
 
 					$context->language->id = $customer_id_lang;
 				}

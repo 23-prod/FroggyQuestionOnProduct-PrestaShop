@@ -1,6 +1,7 @@
 Hello,
 
-A new question has been asked to you about this product: {product_name}.
+A new question has been asked from {from_email} to you about this product: {product_id} - {product_name}.
+Link: {product_link}
 
 {question}
 

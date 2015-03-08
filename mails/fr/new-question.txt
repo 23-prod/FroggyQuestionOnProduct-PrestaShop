@@ -1,6 +1,7 @@
 Bonjour,
 
-Une question vient de vous être posé à propos du produit : {product_name}.
+Une question vient de vous être posée par {from_email} à propos du produit : {product_id} - {product_name}.
+Lien: {product_link}
 
 {question}
 

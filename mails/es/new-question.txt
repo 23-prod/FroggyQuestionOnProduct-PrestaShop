@@ -1,6 +1,7 @@
 Buenos días,
 
-Una cuestión acaba de serle puesta a propósito del producto: {product_name}.
+Una cuestión acaba de serle puesta por {from_email} a propósito del producto: {product_id} - {product_name}.
+URL : {product_link}
 
 {question}
 
