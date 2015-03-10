@@ -95,7 +95,7 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
 									'{product_link}' => $this->context->link->getProductLink($product, null, null, null, null, Configuration::get('PS_LANG_DEFAULT')),
 									'{from_email}' => $ct->email,
 									'{question}' => Tools::htmlentitiesUTF8(Tools::getValue('message'))
-								), Configuration::get('PS_SHOP_EMAIL'), null, null, null, null, null, _PS_MODULE_DIR_.'/'.$this->module->name.'/mails/', false, (int)$this->context->shop->id);
+								), Configuration::get('PS_SHOP_EMAIL'), null, $ct->email, null, null, null, _PS_MODULE_DIR_.'/'.$this->module->name.'/mails/', false, (int)$this->context->shop->id);
 
 							$this->context->language->id = $customer_id_lang;
 						}
