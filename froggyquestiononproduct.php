@@ -32,7 +32,7 @@ if (!class_exists('FroggyModule', false)) require_once dirname(__FILE__).'/frogg
 /**
  * Module Froggy Question On Product
  *
- * Version: 1.3.0
+ * Version: 1.3.1
  */
 class FroggyQuestionOnProduct extends FroggyModule
 {
@@ -55,7 +55,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 	{
 		$this->name = 'froggyquestiononproduct';
 		$this->author = 'Froggy Commerce';
-		$this->version = '1.3.0';
+		$this->version = '1.3.1';
 		$this->tab = 'front_office_features';
 
 		parent::__construct();
