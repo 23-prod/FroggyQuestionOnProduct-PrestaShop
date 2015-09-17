@@ -95,7 +95,7 @@ else
                     Mail::Send(Configuration::get('PS_LANG_DEFAULT'), 'new-question', $module->l('A new question about a product has been asked to you'), array(
                         '{product_id}' => $product->id,
                         '{product_name}' => $product->name[Configuration::get('PS_LANG_DEFAULT')],
-                        '{product_link}' => $context->link->getProductLink($product, null, null, null, null, Configuration::get('PS_LANG_DEFAULT')),
+                        '{product_link}' => $context->link->getProductLink($product, null, null, null, Configuration::get('PS_LANG_DEFAULT')),
                         '{from_email}' => $ct->email,
                         '{question}' => Tools::htmlentitiesUTF8(Tools::getValue('message'))
                     ), Configuration::get('PS_SHOP_EMAIL'), null, $ct->email, null, null, null, _PS_MODULE_DIR_.'/'.$module->name.'/mails/', false);

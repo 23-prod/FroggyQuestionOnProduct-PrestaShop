@@ -89,10 +89,11 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
 							$customer_id_lang = $this->context->language->id;
 							$this->context->language->id = Configuration::get('PS_LANG_DEFAULT');
 
-							$product_link = $this->context->link->getProductLink($product, null, null, null, null, Configuration::get('PS_LANG_DEFAULT'));
-							if (version_compare(_PS_VERSION_, '1.6.0') >= 0)
-								$product_link = $this->context->link->getProductLink($product, null, null, null, null, Configuration::get('PS_LANG_DEFAULT'), (int)Shop::getContextShopID());
 
+							if (version_compare(_PS_VERSION_, '1.5.0') >= 0)
+								$product_link = $this->context->link->getProductLink($product, null, null, null, Configuration::get('PS_LANG_DEFAULT'), (int)$this->context->shop->id);
+							else
+								$product_link = $this->context->link->getProductLink($product, null, null, null, Configuration::get('PS_LANG_DEFAULT'));
 
 							Mail::Send(Configuration::get('PS_LANG_DEFAULT'), 'new-question', $this->module->l('A new question about a product has been asked to you'), array(
 									'{product_id}' => $product->id,
