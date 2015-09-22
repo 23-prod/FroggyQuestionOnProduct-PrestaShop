@@ -27,7 +27,9 @@ defined('_PS_VERSION_') || require dirname(__FILE__).'/index.php';
 /*
  * Include Froggy Library
  */
-if (!class_exists('FroggyModule', false)) require_once dirname(__FILE__).'/froggy/FroggyModule.php';
+if (!class_exists('FroggyModule', false)) {
+    require_once dirname(__FILE__).'/froggy/FroggyModule.php';
+}
 
 /**
  * Module Froggy Question On Product
@@ -117,14 +119,15 @@ class FroggyQuestionOnProduct extends FroggyModule
      */
     public function hookDisplayProductTab($params)
     {
-        if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged())
+        if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
             return;
+        }
 
-        if (version_compare(_PS_VERSION_, '1.6.0') >= 0)
+        if (version_compare(_PS_VERSION_, '1.6.0') >= 0) {
             return;
+        }
 
-        if ($this->isInTab())
-        {
+        if ($this->isInTab()) {
             $this->smarty->assign($this->name, array(
                 'tab_text' => Configuration::get('FC_QOP_TAB_TEXT', $this->context->language->id)
             ));
@@ -141,11 +144,11 @@ class FroggyQuestionOnProduct extends FroggyModule
      */
     public function hookDisplayProductTabContent($params)
     {
-        if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged())
+        if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
             return;
+        }
 
-        if ($this->isInTab())
-        {
+        if ($this->isInTab()) {
             $this->smarty->assign($this->name, array(
                 'isLogged' => $this->isCustomerLogged(),
                 'id_product' => Tools::getValue('id_product'),
@@ -157,9 +160,7 @@ class FroggyQuestionOnProduct extends FroggyModule
             ));
 
             return $this->fcdisplay(__FILE__, 'hookDisplayProductTabContent.tpl');
-        }
-        elseif (version_compare(_PS_VERSION_, '1.6.0') >= 0 && $this->isInFancybox())
-        {
+        } elseif (version_compare(_PS_VERSION_, '1.6.0') >= 0 && $this->isInFancybox()) {
             $this->processProductButtons();
             return $this->fcdisplay(__FILE__, 'hookDisplayProductTabContent.tpl');
         }
@@ -174,8 +175,9 @@ class FroggyQuestionOnProduct extends FroggyModule
      */
     public function hookDisplayLeftColumnProduct($params)
     {
-        if (version_compare(_PS_VERSION_, '1.6.0') >= 0)
+        if (version_compare(_PS_VERSION_, '1.6.0') >= 0) {
             return;
+        }
 
         return $this->processProductButtons();
     }
@@ -189,8 +191,9 @@ class FroggyQuestionOnProduct extends FroggyModule
      */
     public function hookDisplayProductButtons($params)
     {
-        if (version_compare(_PS_VERSION_, '1.6.0') < 0)
+        if (version_compare(_PS_VERSION_, '1.6.0') < 0) {
             return;
+        }
 
         return $this->processProductButtons();
     }
@@ -203,8 +206,9 @@ class FroggyQuestionOnProduct extends FroggyModule
      */
     public function hookActionAdminControllerSetMedia($params)
     {
-        if (Tools::strtolower(Tools::getValue('controller')) == 'adminmodules' && Tools::getValue('configure') == $this->name)
+        if (Tools::strtolower(Tools::getValue('controller')) == 'adminmodules' && Tools::getValue('configure') == $this->name) {
             $this->context->controller->addJs($this->_path.'views/js/backend.js');
+        }
     }
 
     /**
@@ -214,49 +218,51 @@ class FroggyQuestionOnProduct extends FroggyModule
      */
     protected function postProcess()
     {
-        if (Tools::getIsset('froggyquestiononproduct_config'))
-        {
-            if (!Validate::isInt(Tools::getValue('FC_QOP_CONTACT_ID')))
+        if (Tools::getIsset('froggyquestiononproduct_config')) {
+            if (!Validate::isInt(Tools::getValue('FC_QOP_CONTACT_ID'))) {
                 $this->errors[] = $this->l('Contact field is incorrect');
+            }
 
             if (Tools::getValue('FC_QOP_SHOW_MODE') != self::SHOW_MODE_FANCY &&
                 Tools::getValue('FC_QOP_SHOW_MODE') != self::SHOW_MODE_TAB &&
-                Tools::getValue('FC_QOP_SHOW_MODE') != self::SHOW_MODE_PAGE)
+                Tools::getValue('FC_QOP_SHOW_MODE') != self::SHOW_MODE_PAGE) {
                 $this->errors[] = $this->l('Show mode is incorrect');
+            }
 
             $multilang_fields = array(
                 'tab_text' => $this->l('Tab text is invalid'),
                 'link_text' => $this->l('Link text is invalid')
             );
             $languages = Language::getLanguages(true);
-            foreach ($multilang_fields as $field => $message)
-            {
+            foreach ($multilang_fields as $field => $message) {
                 $values = Tools::getValue($field);
-                if (is_array($values))
-                    foreach ($languages as $language)
-                    {
-                        if (!isset($values[$language['id_lang']]) || !Validate::isCleanHtml($values[$language['id_lang']]) || $values[$language['id_lang']] == '')
+                if (is_array($values)) {
+                    foreach ($languages as $language) {
+                        if (!isset($values[$language['id_lang']]) || !Validate::isCleanHtml($values[$language['id_lang']]) || $values[$language['id_lang']] == '') {
                             $this->errors[] = $message;
+                        }
                     }
-                else
+                } else {
                     $this->errors[] = $message;
+                }
             }
 
-            if (!count($this->errors))
-            {
+            if (!count($this->errors)) {
                 $multilang_fields = array(
                     'FC_QOP_TAB_TEXT' => 'tab_text',
                     'FC_QOP_LINK_TEXT' => 'link_text'
                 );
-                foreach ($this->getModuleConfigurationsKeys() as $configuration)
-                    if (isset($multilang_fields[$configuration]))
+                foreach ($this->getModuleConfigurationsKeys() as $configuration) {
+                    if (isset($multilang_fields[$configuration])) {
                         Configuration::updateValue($configuration, Tools::getValue($multilang_fields[$configuration]));
-                    else
+                    } else {
                         Configuration::updateValue($configuration, Tools::getValue($configuration));
+                    }
+                }
                 return true;
-            }
-            else
+            } else {
                 return false;
+            }
         }
         return null;
     }
@@ -266,11 +272,11 @@ class FroggyQuestionOnProduct extends FroggyModule
      */
     protected function processProductButtons()
     {
-        if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged())
+        if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->isCustomerLogged()) {
             return;
+        }
 
-        if (!$this->isInTab())
-        {
+        if (!$this->isInTab()) {
             $this->smarty->assign($this->name, array(
                 'link_text' => Configuration::get('FC_QOP_LINK_TEXT', $this->context->language->id),
                 'controller_href' => $this->getModuleLink('form').(version_compare(_PS_VERSION_, '1.5') >= 0 && Configuration::get('PS_REWRITING_SETTINGS') ? '?' : ''),

@@ -25,54 +25,57 @@ require_once(dirname(__FILE__).'/../../config/config.inc.php');
 require_once(dirname(__FILE__).'/../../init.php');
 require_once(dirname(__FILE__).'/froggyquestiononproduct.php');
 require_once(dirname(__FILE__).'/froggy/FroggyContext.php');
-if (!Tools::getIsset('ajax')) require_once(dirname(__FILE__).'/../../header.php');
+
+if (!Tools::getIsset('ajax')) {
+    require_once(dirname(__FILE__).'/../../header.php');
+}
 
 $context = FroggyContext::getContext();
 $module = new FroggyQuestionOnProduct();
 $errors = $assign = array();
 
-if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$module->isCustomerLogged())
+if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$module->isCustomerLogged()) {
     $errors[] = Tools::displayError('Please login, in order to send a question about a product');
-else
-{
-    if (Tools::isSubmit('submitQuestion'))
-    {
-        if (Validate::isInt(Tools::getValue('id_product')))
-        {
+} else {
+    if (Tools::isSubmit('submitQuestion')) {
+        if (Validate::isInt(Tools::getValue('id_product'))) {
             $product = new Product(Tools::getValue('id_product'));
-            if (!Validate::isLoadedObject($product))
+            if (!Validate::isLoadedObject($product)) {
                 $errors[] = $module->l('Product ID is incorrect');
-        }
-        else
+            }
+        } else {
             $errors[] = $module->l('Product ID is incorrect');
+        }
 
-        if (!$module->isCustomerLogged() && !Validate::isEmail(Tools::getValue('email')))
+        if (!$module->isCustomerLogged() && !Validate::isEmail(Tools::getValue('email'))) {
             $errors[] = $module->l('Your email is invalid');
+        }
 
-        if (!Validate::isCleanHtml(Tools::getValue('message')) || !Tools::getValue('message'))
+        if (!Validate::isCleanHtml(Tools::getValue('message')) || !Tools::getValue('message')) {
             $errors[] = $module->l('Message field is invalid');
+        }
 
-        if (!count($errors))
-        {
+        if (!count($errors)) {
             /*
              * Create Customer Thread
              */
             $ct = new CustomerThread();
-            if (isset($context->customer->id) && $context->customer->id)
+            if (isset($context->customer->id) && $context->customer->id) {
                 $ct->id_customer = $context->customer->id;
+            }
             $ct->id_shop = (int)$context->shop->id;
             $ct->id_product = Tools::getValue('id_product');
             $ct->id_contact = Configuration::get('FC_QOP_CONTACT_ID');
             $ct->id_lang = (int)$context->language->id;
-            if ($module->isCustomerLogged())
+            if ($module->isCustomerLogged()) {
                 $ct->email = $context->customer->email;
-            else
+            } else {
                 $ct->email = Tools::getValue('email');
+            }
 
             $ct->status = 'open';
             $ct->token = Tools::passwdGen(12);
-            if ($ct->add())
-            {
+            if ($ct->add()) {
                 /*
                  * Prepare message
                  */
@@ -85,8 +88,7 @@ else
                 $cm->message = $message;
                 $cm->ip_address = ip2long($_SERVER['REMOTE_ADDR']);
                 $cm->user_agent = $_SERVER['HTTP_USER_AGENT'];
-                if ($cm->add())
-                {
+                if ($cm->add()) {
                     $assign = array('success' => true);
 
                     $customer_id_lang = $context->language->id;
@@ -101,16 +103,15 @@ else
                     ), Configuration::get('PS_SHOP_EMAIL'), null, $ct->email, null, null, null, _PS_MODULE_DIR_.'/'.$module->name.'/mails/', false);
 
                     $context->language->id = $customer_id_lang;
-                }
-                else
+                } else {
                     $errors[] = Tools::displayError('An error occurred while sending the message.');
-            }
-            else
+                }
+            } else {
                 $errors[] = Tools::displayError('An error occurred while sending the message.');
+            }
         }
 
-        if (Tools::getIsset('ajax'))
-        {
+        if (Tools::getIsset('ajax')) {
             echo Tools::jsonEncode(array(
                 'has_errors' => (bool)count($errors),
                 'errors' => $errors
@@ -138,4 +139,6 @@ $context->smarty->assign($module->name, $assign);
 
 $context->smarty->display(dirname(__FILE__).'/views/templates/front/form.tpl');
 
-if (!Tools::getIsset('ajax')) require_once(dirname(__FILE__).'/../../footer.php');
+if (!Tools::getIsset('ajax')) {
+    require_once(dirname(__FILE__).'/../../footer.php');
+}

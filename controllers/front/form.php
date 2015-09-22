@@ -33,45 +33,47 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
 
     public function postProcess()
     {
-        if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->module->isCustomerLogged())
+        if (Configuration::get('FC_QOP_ONLY_FOR_CUSTOMER') && !$this->module->isCustomerLogged()) {
             $this->errors[] = Tools::displayError('Please login, in order to send a question about a product');
-        else
-        {
-            if (Tools::isSubmit('submitQuestion'))
-            {
-                if (Validate::isInt(Tools::getValue('id_product')))
-                {
+        } else {
+
+            if (Tools::isSubmit('submitQuestion')) {
+                if (Validate::isInt(Tools::getValue('id_product'))) {
                     $product = new Product(Tools::getValue('id_product'));
-                    if (!Validate::isLoadedObject($product))
+                    if (!Validate::isLoadedObject($product)) {
                         $this->errors[] = $this->module->l('Product ID is incorrect');
-                }
-                else
+                    }
+                } else {
                     $this->errors[] = $this->module->l('Product ID is incorrect');
+                }
 
-                if (!$this->module->isCustomerLogged() && !Validate::isEmail(Tools::getValue('email')))
+                if (!$this->module->isCustomerLogged() && !Validate::isEmail(Tools::getValue('email'))) {
                     $this->errors[] = $this->module->l('Your email is invalid');
+                }
 
-                if (!Validate::isCleanHtml(Tools::getValue('message')) || !Tools::getValue('message'))
+                if (!Validate::isCleanHtml(Tools::getValue('message')) || !Tools::getValue('message')) {
                     $this->errors[] = $this->module->l('Message field is invalid');
+                }
 
-                if (!count($this->errors))
-                {
+                if (!count($this->errors)) {
                     // Create Customer Thread
                     $ct = new CustomerThread();
-                    if (isset($this->context->customer->id) && $this->context->customer->id)
+                    if (isset($this->context->customer->id) && $this->context->customer->id) {
                         $ct->id_customer = $this->context->customer->id;
+                    }
                     $ct->id_shop = (int)$this->context->shop->id;
                     $ct->id_product = Tools::getValue('id_product');
                     $ct->id_contact = Configuration::get('FC_QOP_CONTACT_ID');
                     $ct->id_lang = (int)$this->context->language->id;
-                    if ($this->module->isCustomerLogged())
+                    if ($this->module->isCustomerLogged()) {
                         $ct->email = $this->context->customer->email;
-                    else
+                    } else {
                         $ct->email = Tools::getValue('email');
+                    }
                     $ct->status = 'open';
                     $ct->token = Tools::passwdGen(12);
-                    if ($ct->add())
-                    {
+
+                    if ($ct->add()) {
                         // Prepare message
                         $message = $this->module->l('A customer have a question about one product...');
                         $message .= "\n\n".'---'."\n\n";
@@ -82,18 +84,18 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
                         $cm->message = $message;
                         $cm->ip_address = ip2long($_SERVER['REMOTE_ADDR']);
                         $cm->user_agent = $_SERVER['HTTP_USER_AGENT'];
-                        if ($cm->add())
-                        {
+
+                        if ($cm->add()) {
                             $this->assign = array('success' => true);
 
                             $customer_id_lang = $this->context->language->id;
                             $this->context->language->id = Configuration::get('PS_LANG_DEFAULT');
 
-
-                            if (version_compare(_PS_VERSION_, '1.5.0') >= 0)
+                            if (version_compare(_PS_VERSION_, '1.5.0') >= 0) {
                                 $product_link = $this->context->link->getProductLink($product, null, null, null, Configuration::get('PS_LANG_DEFAULT'), (int)$this->context->shop->id);
-                            else
+                            } else {
                                 $product_link = $this->context->link->getProductLink($product, null, null, null, Configuration::get('PS_LANG_DEFAULT'));
+                            }
 
                             Mail::Send(Configuration::get('PS_LANG_DEFAULT'), 'new-question', $this->module->l('A new question about a product has been asked to you'), array(
                                     '{product_id}' => $product->id,
@@ -104,16 +106,15 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
                                 ), Configuration::get('PS_SHOP_EMAIL'), null, $ct->email, null, null, null, _PS_MODULE_DIR_.'/'.$this->module->name.'/mails/', false, (int)$this->context->shop->id);
 
                             $this->context->language->id = $customer_id_lang;
-                        }
-                        else
+                        } else {
                             $this->errors[] = Tools::displayError('An error occurred while sending the message.');
-                    }
-                    else
+                        }
+                    } else {
                         $this->errors[] = Tools::displayError('An error occurred while sending the message.');
+                    }
                 }
 
-                if (Tools::getIsset('ajax'))
-                {
+                if (Tools::getIsset('ajax')) {
                     echo Tools::jsonEncode(array(
                         'has_errors' => (bool)count($this->errors),
                         'errors' => $this->errors
@@ -144,9 +145,10 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
         ));
         $this->context->smarty->assign($this->module->name, $this->assign);
 
-        if (version_compare(_PS_VERSION_, '1.6.0') >= 0)
+        if (version_compare(_PS_VERSION_, '1.6.0') >= 0) {
             return $this->setTemplate('form.bootstrap.tpl');
-        else
+        } else {
             return $this->setTemplate('form.tpl');
+        }
     }
 }
