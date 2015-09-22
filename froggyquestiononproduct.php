@@ -70,7 +70,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function getContent()
 	{
-		$this->context->controller->addCss($this->_path.'css/backend.css');
+		$this->context->controller->addCss($this->_path.'views/css/backend.css');
 
 		// Call POST process
 		$assign = array(
@@ -104,8 +104,8 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookDisplayHeader($params)
 	{
-		$this->context->controller->addJS($this->_path.'js/common.js');
-		$this->context->controller->addCSS($this->_path.'css/frontend.css');
+		$this->context->controller->addJS($this->_path.'views/js/common.js');
+		$this->context->controller->addCSS($this->_path.'views/css/frontend.css');
 	}
 
 	/**
@@ -204,7 +204,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 	public function hookActionAdminControllerSetMedia($params)
 	{
 		if (Tools::strtolower(Tools::getValue('controller')) == 'adminmodules' && Tools::getValue('configure') == $this->name)
-			$this->context->controller->addJs($this->_path.'js/backend.js');
+			$this->context->controller->addJs($this->_path.'views/js/backend.js');
 	}
 
 	/**
@@ -325,7 +325,7 @@ class FroggyQuestionOnProduct extends FroggyModule
 	 */
 	public function hookBackOfficeHeader($params)
 	{
-		return '<script type="text/javascript" src="'.$this->_path.'js/backend.js"></script>';
+		return '<script type="text/javascript" src="'.$this->_path.'views/js/backend.js"></script>';
 	}
 
 	public function hookHeader($params)
