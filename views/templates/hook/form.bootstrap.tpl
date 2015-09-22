@@ -17,7 +17,7 @@
 *  @copyright  2013-2015 Froggy Commerce
 *}
 
-<form class="froggy-qop-form{if isset($froggyquestiononproduct.in_page)} in-page{/if}" action="{$froggyquestiononproduct.controller_href|escape:'htmlall':'UTF-8'}&id_product={$froggyquestiononproduct.id_product|intval}" method="post" data-in-fancy="{if isset($froggyquestiononproduct.in_fancy)}1{else}0{/if}">
+<form id="froggy-qop-form" class="froggy-qop-form{if isset($froggyquestiononproduct.in_page)} in-page{/if}" action="#" method="post" data-in-fancy="{if isset($froggyquestiononproduct.in_fancy)}1{else}0{/if}">
 
     {if !isset($froggyquestiononproduct.in_page)}
         <div class="alert alert-success success" style="display: none;">
@@ -55,3 +55,10 @@
     </div>
 
 </form>
+
+<script>
+    {* Bot blocker :p *}
+    $(document).ready(function() {
+        $('#froggy-qop-form').attr('action', '{$froggyquestiononproduct.controller_href|escape:'htmlall':'UTF-8'}&id_product={$froggyquestiononproduct.id_product|intval}');
+    });
+</script>
