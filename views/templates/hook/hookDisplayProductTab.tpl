@@ -18,7 +18,7 @@
 *}
 
 <li>
-	<a href="#idTabfroggyquestiononproduct" class="idTabHrefShort">
-		{$froggyquestiononproduct.tab_text|escape:'htmlall':'UTF-8'}
-	</a>
+    <a href="#idTabfroggyquestiononproduct" class="idTabHrefShort">
+        {$froggyquestiononproduct.tab_text|escape:'htmlall':'UTF-8'}
+    </a>
 </li>

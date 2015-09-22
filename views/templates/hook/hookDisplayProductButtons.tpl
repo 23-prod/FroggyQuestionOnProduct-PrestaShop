@@ -18,21 +18,21 @@
 *}
 
 <li class="froggy-qop-link">
-	{if $froggyquestiononproduct.in_fancy}
-		<a id="froggy-qop-fancybox" href="#froggy-qop-fancybox-content">
-			<img src="{$froggyquestiononproduct.module_path|escape:'htmlall':'UTF-8'}/views/img/help.png" alt="" /> {$froggyquestiononproduct.link_text|escape:'htmlall':'UTF-8'}
-		</a>
-	{else}
-		<a id="froggy-qop-fancybox" href="{$froggyquestiononproduct.controller_href}&id_product={$froggyquestiononproduct.id_product|escape:'htmlall':'UTF-8'}">
-			<img src="{$froggyquestiononproduct.module_path|escape:'htmlall':'UTF-8'}/views/img/help.png" alt="" /> {$froggyquestiononproduct.link_text|escape:'htmlall':'UTF-8'}
-		</a>
-	{/if}
+    {if $froggyquestiononproduct.in_fancy}
+        <a id="froggy-qop-fancybox" href="#froggy-qop-fancybox-content">
+            <img src="{$froggyquestiononproduct.module_path|escape:'htmlall':'UTF-8'}/views/img/help.png" alt="" /> {$froggyquestiononproduct.link_text|escape:'htmlall':'UTF-8'}
+        </a>
+    {else}
+        <a id="froggy-qop-fancybox" href="{$froggyquestiononproduct.controller_href}&id_product={$froggyquestiononproduct.id_product|escape:'htmlall':'UTF-8'}">
+            <img src="{$froggyquestiononproduct.module_path|escape:'htmlall':'UTF-8'}/views/img/help.png" alt="" /> {$froggyquestiononproduct.link_text|escape:'htmlall':'UTF-8'}
+        </a>
+    {/if}
 
-	{if $froggyquestiononproduct.in_fancy}
-		<div style="display: none;">
-			<div id="froggy-qop-fancybox-content">
-				{include file="{$froggyquestiononproduct.module_tpl_dir|escape:'htmlall':'UTF-8'}/hook/form.tpl"}
-			</div>
-		</div>
-	{/if}
+    {if $froggyquestiononproduct.in_fancy}
+        <div style="display: none;">
+            <div id="froggy-qop-fancybox-content">
+                {include file="{$froggyquestiononproduct.module_tpl_dir|escape:'htmlall':'UTF-8'}/hook/form.tpl"}
+            </div>
+        </div>
+    {/if}
 </li>

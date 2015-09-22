@@ -18,5 +18,5 @@
 *}
 
 <div id="idTabfroggyquestiononproduct">
-	{include file="{$froggyquestiononproduct.module_tpl_dir}/hook/form.tpl"}
+    {include file="{$froggyquestiononproduct.module_tpl_dir}/hook/form.tpl"}
 </div>
