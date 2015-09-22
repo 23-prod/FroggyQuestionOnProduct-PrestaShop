@@ -28,8 +28,8 @@
             <img src="{$link->getImageLink($froggyquestiononproduct.product->link_rewrite, $froggyquestiononproduct.product->id_image, $froggyquestiononproduct.image_format)|escape:'htmlall':'UTF-8'}" alt="{$froggyquestiononproduct.product->name|escape:'htmlall':'UTF-8'}" />
         </a>
     </div>
-    <h3><a href="{$link->getProductLink($froggyquestiononproduct.product)}" title="{$froggyquestiononproduct.product->name|escape:'htmlall':'UTF-8'}">{$froggyquestiononproduct.product->name|escape:'html':'UTF-8'|truncate:35:'...'}</a></h3>
-    <p class="product_desc">{$froggyquestiononproduct.product->description_short|strip_tags:'UTF-8'|truncate:360:'...'}</p>
+    <h3><a href="{$link->getProductLink($froggyquestiononproduct.product)|escape:'htmlall':'UTF-8'}" title="{$froggyquestiononproduct.product->name|escape:'htmlall':'UTF-8'}">{$froggyquestiononproduct.product->name|escape:'html':'UTF-8'|truncate:35:'...'}</a></h3>
+    <p class="product_desc">{$froggyquestiononproduct.product->description_short|strip_tags:'UTF-8'|truncate:360:'...'|escape:'htmlall':'UTF-8'}</p>
     <div class="clearBoth"></div>
 </div>
 

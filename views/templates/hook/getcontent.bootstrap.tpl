@@ -57,7 +57,7 @@
                 <div class="col-lg-9">
                     <select name="FC_QOP_CONTACT_ID">
                         {foreach from=$contacts item=contact}
-                            <option value="{$contact.id_contact}" {if $froggyquestiononproduct.FC_QOP_CONTACT_ID == $contact.id_contact}selected="selected"{/if}>
+                            <option value="{$contact.id_contact|intval}" {if $froggyquestiononproduct.FC_QOP_CONTACT_ID == $contact.id_contact}selected="selected"{/if}>
                                 {$contact.name|escape:'htmlall':'UTF-8'} - {$contact.email|escape:'htmlall':'UTF-8'}
                             </option>
                         {/foreach}
@@ -82,8 +82,8 @@
                 <label class="control-label col-lg-3">{l s='Tab text' mod='froggyquestiononproduct'}</label>
                 <div class="col-lg-9">
                     {foreach from=$languages item=language}
-                        <div id="tab_text_{$language['id_lang']}" style="display: {if $language['id_lang'] == $id_lang_default}block{else}none{/if}">
-                            <input type="text" name="tab_text[{$language['id_lang']}]" id="tab_text_{$language['id_lang']}" value="{if isset($smarty.post.tab_text.{$language['id_lang']})}{$smarty.post.tab_text.{$language['id_lang']}|escape:'htmlall':'UTF-8'}{else}{$froggyquestiononproduct.FC_QOP_TAB_TEXT.{$language['id_lang']}}{/if}" />
+                        <div id="tab_text_{$language['id_lang']|intval}" style="display: {if $language['id_lang'] == $id_lang_default}block{else}none{/if}">
+                            <input type="text" name="tab_text[{$language['id_lang']|intval}]" id="tab_text_{$language['id_lang']|intval}" value="{if isset($smarty.post.tab_text.{$language['id_lang']})}{$smarty.post.tab_text.{$language['id_lang']}|escape:'htmlall':'UTF-8'}{else}{$froggyquestiononproduct.FC_QOP_TAB_TEXT.{$language['id_lang']}|escape:'htmlall':'UTF-8'}{/if}" />
                         </div>
                     {/foreach}
                     {FroggyDisplaySafeHtml s=$module->displayFlags($languages, $id_lang_default, $divLangName, 'tab_text', true)}
@@ -95,8 +95,8 @@
                 <label class="control-label col-lg-3">{l s='Link text' mod='froggyquestiononproduct'}</label>
                 <div class="col-lg-9">
                     {foreach from=$languages item=language}
-                        <div id="link_text_{$language['id_lang']}" style="display: {if $language['id_lang'] == $id_lang_default}block{else}none{/if}">
-                            <input type="text" name="link_text[{$language['id_lang']}]" id="link_text_{$language['id_lang']}" value="{if isset($smarty.post.link_text.{$language['id_lang']})}{$smarty.post.link_text.{$language['id_lang']}|escape:'htmlall':'UTF-8'}{else}{$froggyquestiononproduct.FC_QOP_LINK_TEXT.{$language['id_lang']}}{/if}" />
+                        <div id="link_text_{$language['id_lang']|intval}" style="display: {if $language['id_lang'] == $id_lang_default}block{else}none{/if}">
+                            <input type="text" name="link_text[{$language['id_lang']|intval}]" id="link_text_{$language['id_lang']|intval}" value="{if isset($smarty.post.link_text.{$language['id_lang']})}{$smarty.post.link_text.{$language['id_lang']}|escape:'htmlall':'UTF-8'}{else}{$froggyquestiononproduct.FC_QOP_LINK_TEXT.{$language['id_lang']}|escape:'htmlall':'UTF-8'}{/if}" />
                         </div>
                     {/foreach}
                     {FroggyDisplaySafeHtml s=$module->displayFlags($languages, $id_lang_default, $divLangName, 'link_text', true)}

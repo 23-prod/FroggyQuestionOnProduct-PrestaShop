@@ -17,7 +17,7 @@
 *  @copyright  2013-2015 Froggy Commerce
 *}
 
-<form class="froggy-qop-form{if isset($froggyquestiononproduct.in_page)} in-page{/if}" action="{$froggyquestiononproduct.controller_href}&id_product={$froggyquestiononproduct.id_product}" method="post" data-in-fancy="{if isset($froggyquestiononproduct.in_fancy)}1{else}0{/if}">
+<form class="froggy-qop-form{if isset($froggyquestiononproduct.in_page)} in-page{/if}" action="{$froggyquestiononproduct.controller_href|escape:'htmlall':'UTF-8'}&id_product={$froggyquestiononproduct.id_product|intval}" method="post" data-in-fancy="{if isset($froggyquestiononproduct.in_fancy)}1{else}0{/if}">
 
     {if !isset($froggyquestiononproduct.in_page)}
         <div class="success" style="display: none;">
