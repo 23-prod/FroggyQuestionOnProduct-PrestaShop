@@ -75,7 +75,7 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
 
                     if ($ct->add()) {
                         // Prepare message
-                        $message = $this->module->l('A customer have a question about one product...');
+                        $message = $this->module->l('A customer have a question about a product...');
                         $message .= "\n\n".'---'."\n\n";
                         $message .= Tools::htmlentitiesUTF8(Tools::getValue('message'));
 
@@ -97,7 +97,7 @@ class FroggyQuestionOnProductFormModuleFrontController extends ModuleFrontContro
                                 $product_link = $this->context->link->getProductLink($product, null, null, null, Configuration::get('PS_LANG_DEFAULT'));
                             }
 
-                            Mail::Send(Configuration::get('PS_LANG_DEFAULT'), 'new-question', $this->module->l('A new question about a product has been asked to you'), array(
+                            Mail::Send(Configuration::get('PS_LANG_DEFAULT'), 'new-question', $this->module->l('A new question about a product has been asked to you').': '.$product->name[Configuration::get('PS_LANG_DEFAULT')], array(
                                     '{product_id}' => $product->id,
                                     '{product_name}' => $product->name[Configuration::get('PS_LANG_DEFAULT')],
                                     '{product_link}' => $product_link,

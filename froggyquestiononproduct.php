@@ -57,7 +57,7 @@ class FroggyQuestionOnProduct extends FroggyModule
     {
         $this->name = 'froggyquestiononproduct';
         $this->author = 'Froggy Commerce';
-        $this->version = '1.3.4';
+        $this->version = '1.3.5';
         $this->tab = 'front_office_features';
 
         parent::__construct();
